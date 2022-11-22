@@ -1,5 +1,5 @@
 <h1 align="center">Welcome to THE GNOME DEPOT! 👋</h1>
-<a href="https://main.d2i0cgsif44sh0.amplifyapp.com/html/home.html" target="_blank"><img src="img/misc/GnomeDepotReadMe.png" alt=""></img></a>
+<a href="https://main.d2i0cgsif44sh0.amplifyapp.com/html/home.html" target="_blank"><img src="/src/main/resources/static/img/misc/GnomeDepotReadMe.png" alt=""></img></a>
 
 # Project Title
 
