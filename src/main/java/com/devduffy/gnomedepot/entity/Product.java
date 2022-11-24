@@ -7,10 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.web.jsf.FacesContextUtils;
-
 import lombok.AllArgsConstructor;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -35,6 +32,22 @@ public class Product {
     @Column(name="category", nullable = false)
     private String category;
 
+    @Column(name="image", nullable = false)
+    private String image;
 
+    @Column(name="description", nullable = false)
+    private String description;
+
+	@Column(name="stars", nullable = false)
+	private Double stars;
+
+	@Column(name="quantity_in_stock")
+	private Integer quantityInStock;
+
+	@Column(name="rating_count")
+	private Integer ratingCount;
+
+	@Column(name="price")
+	private Double price;
 	
 }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ProductController {
     
     
-    @GetMapping(value = {"/", "/index", "index.html"})
+    @GetMapping("/")
     public String homePage(Model model, @RequestParam(required = false) String productName, @RequestParam(required = false) String productCategory ) {
         return "home";
     }
