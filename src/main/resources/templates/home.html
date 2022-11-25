@@ -11,23 +11,24 @@
 </head>
 <body>
   <div id="messageBar" style="background:#F96302;">
-    <a href="/html/home.html" class="messageBar" style="color:white;">Black Friday Savings Happening Now. End 11/30</a>
+    <a th:href="@{/}" class="messageBar" style="color:white;">Black Friday Savings Happening Now. End 11/30</a>
   </div>
   <nav class="navbar">
     <div class="logo-container">
-      <a class="" href="/html/home.html">
-        <img src="/img/navbar/gnome-depot-logo.png" alt="home depot square orange logo" id="gnome-logo">
+      <a class="" th:href="@{/}">
+        <img th:src="@{/img/navbar/gnome-depot-logo.png}" alt="home depot square orange logo" id="gnome-logo">
       </a>
     </div>
     <div class="search-container">
       <form class="search-form">
-        <input class="search-input" type="search" placeholder="What gnome can we help you find today?" aria-label="Search">
+        <input class="search-input" type="search" placeholder="What gnome can we help you find today?"
+          aria-label="Search">
         <button class="search-button" type="submit"><i class="fas fa-search fa-lg"></i></button>
       </form>
     </div>
-    <div class="cart-container" >
-      <a href="/html/cart.html" >
-        <img th:src="@{img/navbar/shopping-cart-gnome-depot.png}" alt="" class="shopping-cart" width="40px">
+    <div class="cart-container">
+      <a th:href="@{/cart}">
+        <img th:src="@{/img/navbar/shopping-cart-gnome-depot.png}" alt="" class="shopping-cart" width="40px">
       </a>
     </div>
   </nav>
@@ -43,27 +44,24 @@
   </div>
   <main>
     <section>
-      <div class="products-container" id="products-container" th:object="${products}">
+      <div class="products-container" id="products-container" th:object="${product}">
         <div class="product-card">
-          <a th:href="@{productDetails.html}" width="300px" height="500px">
-              <img src=${gnomes[i].img} alt="" width="300px">
+          <a th:href="@{/productDetails}" width="300px" height="500px">
+              <!-- <img th:src="@{*{image}}" alt="" width="300px"> -->
           </a>
           <div class="product-card-details">
-          <a th:href="@{productDetails.html}" class="product-name">
-              <h4 class="product-name-text">
-                  ${gnomes[i].name}
+          <a th:href="@{/productDetails}" class="product-name">
+              <h4 class="product-name-text" th:text="*{name}">
               </h4>
           </a>
-          <p class="product-stars">
-              ${starGenerator(gnomes[i].stars)}
-              (${gnomes[i].numRating})
+          <p class="product-stars" th:text="*{stars} + ' ' + *{ratingCount}">
+              
           </p>
-          <p class="margin">
-              $${gnomes[i].price}
+          <p class="margin" th:text="*{price}">
           </p>
           </div>
           <a 
-              th:href="@{cart.html}"
+              th:href="@{/cart}"
               class="add-cart-button"
               >
               Add to Cart
@@ -73,7 +71,7 @@
     </section>
   </main>
 
-  <script src="/js/app.js"></script>
+  <script th:src="@{js/app.js}"></script>
   <!-- <script>
     window.onload = loadAllProducts();
   </script> -->

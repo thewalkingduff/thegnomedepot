@@ -1,9 +1,12 @@
-@font-face {
+/* @font-face {
     font-family: 'Roboto', sans-serif;
     src: url(../fonts/Roboto-Bold.ttf);
     font-weight: bold;
 }
 
+form {
+  display: flex;
+}
 .container {
     position: absolute;
     text-align: center;
@@ -51,4 +54,79 @@ input[type=submit]:hover {
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.error-message {
+  color: red;
+  margin: 0;
+} */
+input {
+  height: 2rem;
+  width: 40%;
+  margin: .5rem;
+}
+form {
+  /* display: grid;
+  grid-template-columns: 1fr 1fr; */
+
+}
+.main-container {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: 1fr;
+  margin-top: 10rem;
+}
+.login-container {
+  background: #fff;
+  padding:  5rem 10rem 8rem;
+  border-radius: 4px;
+  text-align: center;
+}
+.login-form {
+  /* display: grid;
+  gap: 10px; */
+}
+.login-header {
+   color: #333333;
+   font-size: 3rem;
+}
+.login-form-field {
+  height: 5rem;
+  font-size: 1.25rem;
+
+}
+.login-form-submit {
+  background: #F96302;
+  color: #fff;
+  padding: .5rem 2rem;
+  border: none;
+  border-radius: 4px;
+  opacity: 87%;
+  font-size: 1.25rem;
+}
+.login-form-submit:hover {
+  opacity: 100%;
+  cursor: pointer;
+}
+.sign-up-text {
+  text-decoration: none;
+  color: #F96302;
+}
+.input-container {
+  /* margin: 1rem; */
+  width: 50rem;
+ 
+}
+.error-border {
+  border: 2px solid red;
+}
+.login-form-error-message {
+  margin: 0;
+  color: red;
+}
+
+.error-message {
+  color: red;
+  margin: 0;
 }

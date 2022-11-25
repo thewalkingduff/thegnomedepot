@@ -1,5 +1,7 @@
 package com.devduffy.gnomedepot.service;
 
-public class ProductService {
-    
+import com.devduffy.gnomedepot.entity.Product;
+
+public interface ProductService {
+    Product getProduct(Integer id);
 }

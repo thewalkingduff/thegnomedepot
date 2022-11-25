@@ -1,6 +1,7 @@
 package com.devduffy.gnomedepot.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -10,9 +11,8 @@ import com.devduffy.gnomedepot.entity.Order;
 
 public interface OrderRepository extends CrudRepository<Order, Integer>{
     List<Order> findByUserId(Integer userId);
-    List<Order> findByProductId(Integer productId);
-    List<Order> findByProductName(String name);
-    List<Order> findByProductCategory(String category);
+    Optional<Order> findById(Integer id);
+    // List<Order> findOrdersByCategory(String category);
     @Transactional
-    void deleteByOrderId(Integer orderId);
+    void deleteById(Integer orderId);
 }

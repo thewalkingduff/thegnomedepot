@@ -1,7 +1,7 @@
 package com.devduffy.gnomedepot.repository;
 
 import java.util.List;
-
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.devduffy.gnomedepot.entity.Product;
 
 @Repository
-public interface ProductRepository extends CrudRepository<Product, Long> {
+public interface ProductRepository extends CrudRepository<Product, Integer> {
 	// @Query("SELECT p FROM Product p where p.name = :name")
 	// public List<Product> findByProductName(String name);
 
@@ -22,8 +22,9 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 	// public List<Product> findByNameOrCategory(String name, String category);
 
 	// public Product findById(Integer id);
-	List<Product> findByProductId(Integer id);
-	List<Product> findByProductName(String name);
-	List<Product> findByProductCategory(String category);
-	List<Product> findByProductStars(Integer stars);
+	Optional<Product> findById(Integer id);
+	List<Product> findByName(String name);
+	List<Product> findByCategory(String category);
+	List<Product> findByStars(Integer stars);
+	List<Product> findAll();
 }
