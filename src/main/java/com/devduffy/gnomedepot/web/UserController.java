@@ -45,10 +45,15 @@ public class UserController {
 
     @PostMapping("/submitUser")
     public String handleSubmit(@Valid User user, BindingResult result) {
-        System.out.println("Has errors?: " + result.hasErrors());
+        if(user.getLastName().equals(user.getFirstName())) result.rejectValue("lastName", "", "Last name can not equal first name.");
         if(result.hasErrors()) return "register";
         userService.saveUser(user);
-        return "result"; 
+        return "redirect:/result"; 
+    }
+
+    @GetMapping("/result")
+    public String getResult() {
+        return "result";
     }
 
     // public int getUserIndex(String id) {

@@ -1,6 +1,6 @@
 package com.devduffy.gnomedepot.entity;
 
-import java.util.List;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -12,11 +12,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.devduffy.gnomedepot.validation.Age;
+import com.devduffy.gnomedepot.validation.Username;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -35,6 +42,7 @@ public class User {
 	@Column(name="id")
 	private Integer id;
 	
+	@Username(message = "cannot contain special or uppercase charcaters")
 	@NonNull
 	@NotBlank(message = "Username cannot be blank")
     @Size(min = 7, message = "Username is too short")
@@ -88,7 +96,7 @@ public class User {
 
 	@NonNull
 	@NotBlank(message = "Email cannot be blank")
-	@Email
+	@Email(message = "Invalid Email")
 	@Column(name="email", nullable = false, unique = true)
 	private String email;
 
@@ -96,6 +104,13 @@ public class User {
 	@NotBlank(message = "Phone cannot be blank")
 	@Column(name="phone")
 	private String phone;
+
+	@Age(message = "Must be at least 18")
+	@NonNull
+    @Past(message = "date of birth must be in the past")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name="date_of_birth", nullable = false)
+    private Date dateOfBirth;
 
 	@ToString.Exclude
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -212,6 +227,14 @@ public class User {
 
 	public void setOrders(Set<Order> orders) {
 		this.orders = orders;
+	}
+
+	public Date getDateOfBirth() {
+		return this.dateOfBirth;
+	}
+
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
 	}
 
 

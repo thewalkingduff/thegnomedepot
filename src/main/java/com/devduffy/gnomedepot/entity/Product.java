@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -38,15 +40,20 @@ public class Product {
     @Column(name="description", nullable = false)
     private String description;
 
+	@Max(5)
+	@Min(0)
 	@Column(name="stars", nullable = false)
 	private Double stars;
 
+	@Min(0)
 	@Column(name="quantity_in_stock")
 	private Integer quantityInStock;
 
+	@Min(0)
 	@Column(name="rating_count")
 	private Integer ratingCount;
 
+	@Min(1)
 	@Column(name="price")
 	private Double price;
 	

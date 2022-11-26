@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -45,9 +46,11 @@ public class OrderDetails {
     @JoinColumn(name="products_id", nullable=false)
     private Product product;
 
+    @Min(0)
     @Column(name="quantity")
     private Integer quantity;
 
+    @Min(0)
     @Column(name="total")
     private Double total;
     

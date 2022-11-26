@@ -76,8 +76,16 @@
           <input type="text" placeholder="Email" th:field="*{email}">
           <p class="error-message" th:errors="*{phone}" ></p>
           <input type="text" placeholder="Phone" th:field="*{phone}">
+          <p style="font-weight: bold">Date of Birth</p>
+          <p style="color: red" th:errors="*{dateOfBirth}"> </p>
+          <input type="date" th:field="*{dateOfBirth}"> <br><br>
         </div>
+       
+        
+        
+      
         <div class="input-container">
+        </div>
           <input type="submit" value="Submit" class="login-form-submit">
         </div>
 
