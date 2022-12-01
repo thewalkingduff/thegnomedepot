@@ -56,5 +56,4 @@ public class Product {
 	@Min(1)
 	@Column(name="price")
 	private Double price;
-	
 }

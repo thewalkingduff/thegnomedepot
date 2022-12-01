@@ -21,10 +21,7 @@ public interface ProductRepository extends CrudRepository<Product, Integer> {
 	// @Query("SELECT p FROM Product p where p.name like :name OR p.category like :category")
 	// public List<Product> findByNameOrCategory(String name, String category);
 
-	// public Product findById(Integer id);
 	Optional<Product> findById(Integer id);
-	List<Product> findByName(String name);
-	List<Product> findByCategory(String category);
-	List<Product> findByStars(Integer stars);
 	List<Product> findAll();
+	
 }

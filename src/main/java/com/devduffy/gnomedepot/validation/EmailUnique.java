@@ -10,11 +10,10 @@ import javax.validation.Payload;
 
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy =  AgeValidator.class)
-public @interface Age {
-    String message() default "INVALID AGE";
+@Constraint(validatedBy = EmailUniqueValidator.class)
+public @interface EmailUnique {
+
+    String message() default "INVALID USERNAME";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
-
-

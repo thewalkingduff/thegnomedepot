@@ -1,0 +1,24 @@
+<div th:fragment="navbar"></div>
+<div id="messageBar" style="background:#F96302;">
+    <a th:href="@{/}" class="messageBar" style="color:white;">Black Friday Savings Happening Now. End 11/30</a>
+</div>
+    <nav class="navbar">
+        <div class="logo-container">
+            <a class="" th:href="@{/}">
+                <img th:src="@{/img/navbar/gnome-depot-logo.png}" alt="home depot square orange logo" id="gnome-logo">
+            </a>
+        </div>
+        <div class="search-container">
+            <form class="search-form">
+                <input class="search-input" type="search" placeholder="What gnome can we help you find today?"
+                    aria-label="Search">
+                <button class="search-button" type="submit"><i class="fas fa-search fa-lg"></i></button>
+            </form>
+        </div>
+        <div class="cart-container">
+            <a th:href="@{/cart}">
+                <img th:src="@{/img/navbar/shopping-cart-gnome-depot.png}" alt="" class="shopping-cart" width="40px">
+            </a>
+        </div>
+    </nav>
+</div>

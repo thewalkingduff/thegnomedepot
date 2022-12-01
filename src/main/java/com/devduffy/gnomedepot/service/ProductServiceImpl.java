@@ -1,11 +1,18 @@
 package com.devduffy.gnomedepot.service;
 
+import java.util.List;
 import java.util.Optional;
+
+import org.springframework.stereotype.Service;
 
 import com.devduffy.gnomedepot.entity.Product;
 import com.devduffy.gnomedepot.exception.ProductNotFoundException;
 import com.devduffy.gnomedepot.repository.ProductRepository;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
+@Service
 public class ProductServiceImpl implements ProductService{
     ProductRepository productRepository;
 
@@ -15,8 +22,13 @@ public class ProductServiceImpl implements ProductService{
         return unwrapProduct(product, id);
     }
 
-    static Product unwrapProduct(Optional<Product> product, Integer id) {
-        if (product.isPresent()) return product.get();
+    @Override
+    public List<Product> getProducts() {
+        return (List<Product>)productRepository.findAll();
+    }
+
+    static Product unwrapProduct(Optional<Product> entity, Integer id) {
+        if (entity.isPresent()) return entity.get();
         else throw new ProductNotFoundException(id);
     }
 }
