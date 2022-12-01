@@ -49,7 +49,7 @@ public class UserController {
     }
 
     @PostMapping("/user/register")
-    public String handleSubmit(@Valid User user, BindingResult result) {
+    public String createUser(@Valid User user, BindingResult result) {
         if(user.getLastName().equals(user.getFirstName())) result.rejectValue("lastName", "", "Last name can not equal first name.");
         if(result.hasErrors()) return "register";
         user.setCreateDate(new Date());

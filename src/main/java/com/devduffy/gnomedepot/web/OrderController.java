@@ -4,16 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.devduffy.gnomedepot.Constants;
+
 import com.devduffy.gnomedepot.entity.Order;
 import com.devduffy.gnomedepot.entity.Product;
 import com.devduffy.gnomedepot.entity.User;
-import com.devduffy.gnomedepot.form.CartItem;
 import com.devduffy.gnomedepot.service.OrderService;
 import com.devduffy.gnomedepot.service.ProductService;
 import com.devduffy.gnomedepot.service.UserService;

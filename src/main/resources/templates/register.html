@@ -19,7 +19,7 @@
   <main class="main-container">
     <section class="login-container">
       <h1 class="login-header">Register</h1>
-      <form method="post" th:object="${user}" th:action="@{register}">
+      <form method="post" th:object="${user}" th:action="@{register}"> 
         <div class="input-container">
           <p class="error-message" th:errors="*{firstName}"></p>
           <input type="text" placeholder="First Name" th:field="*{firstName}">

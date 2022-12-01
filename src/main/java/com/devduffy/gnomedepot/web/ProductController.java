@@ -23,31 +23,24 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 // @RequestMapping("/products")
 public class ProductController {
-    // ProductServiceImpl productServiceImpl;
 
     @Autowired
     ProductService productService;
 
-    // @GetMapping("/")
-    // public String homePage(Model model, @RequestParam(required = false) String productName, @RequestParam(required = false) String productCategory ) {
-    //     model.addAttribute("product", new Product(2, "Northlight Set of 3 Red and Gray Bearded Chubby Santa Christmas Gnomes 10.5", "christmas indoor", "./src/main/resources/static/img/products/bearded-chubby.webp", "Gnomes are best known for guarding Earthly treasures and are perfect for protecting your holiday goodies. Add a pop of color, a ton of cuteness, and luck to your holiday decor. Makes the perfect addition to your tree, your mantle, window, or anywhere you want to add that whimsical touch. Product Features: Chubby Santa gnome holiday figures Featuring 3 gnomes, one in red and gray, one in red and one in cream and brown Hats have a patch accent on the front Weighted bottoms for tabletop use Recommended for indoor use only Dimensions: 10.5\"H x 4.5\"W x 3.5\"D Material(s): felt/wool/wood Note: Set of 3 includes 1 of each figure pictured", 5.0, 167, 23, 26.39));
-    //     return "home";
-    // }
-
-    @GetMapping("/")
+    @GetMapping("/product/all")
     public String getAllProducts(Model model) {
-
         model.addAttribute("products", productService.getProducts());
         log.info("simple log");
         log.warn("This is a warning.");
         return "home";
-        // return new ResponseEntity<>(productService.getProducts(), HttpStatus.OK);  
     }
 
-    @GetMapping("/productDetails")
+    @GetMapping("/product/details")
     public String getProductDetails(Model model, Integer id) {
         model.addAttribute("productDetail", productService.getProduct(id));
         return "productDetails";
     }
+
+    
 
 }
