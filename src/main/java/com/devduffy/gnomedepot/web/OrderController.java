@@ -41,7 +41,7 @@ public class OrderController {
     public String addToOrder(@RequestParam("id") Integer id) {
         Product product = productService.getProduct(id);
         orderService.addToCart(product, new Order(), userService.getUser(1));
-        return "redirect:/cart";
+        return "redirect:/order/cart";
     }
  
 }

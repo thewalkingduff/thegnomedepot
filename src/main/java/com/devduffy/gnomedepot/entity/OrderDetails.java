@@ -33,9 +33,6 @@ public class OrderDetails {
 	@Column(name="id")
 	private Integer id;
 
-    @Column(name="order_number")
-    private Integer orderNumber;
-	
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name="orders_id", nullable=false)

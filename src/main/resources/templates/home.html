@@ -42,7 +42,7 @@
             <option th:value="4">4</option>
             <option th:value="5">5</option>
           </select>
-          <a th:href="@{/cart/add(id=${product.id})}" class="btn btn-lg btn-outline-info btn-block">Add to Cart</a>
+          <a th:href="@{/order/addToCart(id=${product.id})}" class="btn btn-lg btn-outline-info btn-block">Add to Cart</a>
         </div>
 
         <!-- <form method="post" th:action="@{/cart/add}" th:object="${cartItem}">

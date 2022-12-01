@@ -1,11 +1,13 @@
 package com.devduffy.gnomedepot.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.devduffy.gnomedepot.Constants;
@@ -23,17 +25,12 @@ import lombok.AllArgsConstructor;
 @Service
 public class OrderServiceImpl implements OrderService {
     
+    @Autowired
     OrderRepository orderRepository;
+    @Autowired
     ProductRepository productRepository;
+    @Autowired
     UserRepository userRepository;
-
-    @Override
-    public Order saveOrder(Order order) {
-        if(order.getId() == null || order.getId() == Constants.NOT_FOUND) {
-            throw new OrderNotFoundException(order.getId());
-        } 
-        return orderRepository.save(order);
-    }
 
     @Override
     public Order createOrder(Order order) {
@@ -61,6 +58,7 @@ public class OrderServiceImpl implements OrderService {
 	public void addToCart(Product product, Order order, User user) {
         order.setUser(user);
         order.setStatus("processing");
+        order.setOrderDate(new Date());
 		orderRepository.save(order);	
 	}
 
