@@ -11,6 +11,6 @@ public interface UserService {
     User saveUser(User user);
     void deleteUser(Integer id);
     List<User> getUsers();
-    Set<Order> getOrders(Integer id);
+    List<Order> getOrders(Integer id);
     User getUserByEmail(String email);
 }

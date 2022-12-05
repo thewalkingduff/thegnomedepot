@@ -1,8 +1,8 @@
 <div th:insert="fragments/header :: header"></div>
 
     <h1>Cart Page</h1>
-    <ul th:each="product: ${cart}">
-        <li th:text="*{product}"></li>
+    <ul th:each="product: ${productsInCart}">
+        <li th:text="*{product.name}"></li>
     </ul>
 </body>
 </html>

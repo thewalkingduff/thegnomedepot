@@ -1,10 +1,12 @@
 package com.devduffy.gnomedepot.repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.devduffy.gnomedepot.entity.Product;
@@ -23,5 +25,12 @@ public interface ProductRepository extends CrudRepository<Product, Integer> {
 
 	Optional<Product> findById(Integer id);
 	List<Product> findAll();
+	
+	// @Query(value = "select * from products p where p.name = :word", nativeQuery = true)
+	// @Query("select p from products p where p.name like %:word%")
+	// List<Product> findByKeyword(String word);
+
+	List<Product> findByNameIgnoreCaseContaining(String name);
+	List<Product> productSearchResults = new ArrayList<Product>();
 	
 }

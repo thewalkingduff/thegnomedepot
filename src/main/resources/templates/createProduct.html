@@ -4,54 +4,39 @@
 <main class="main-container">
 
     <h1 class="login-header">Create a Product</h1>
-    <form method="post" th:object="${product}" th:action="@{register}">
+    <form method="post" th:object="${product}" th:action="@{/product/create}">
       <div class="input-container">
-        <p class="error-message" th:errors="*{firstName}"></p>
-        <input type="text" placeholder="First Name" th:field="*{firstName}">
-        <p class="error-message" th:errors="*{lastName}"></p>
-        <input type="text" placeholder="Last Name" th:field="*{lastName}">
+        <p class="error-message" th:errors="*{name}"></p>
+        <input type="text" placeholder="Name" th:field="*{name}">
+        <p class="error-message" th:errors="*{category}"></p>
+        <input type="text" placeholder="Category" th:field="*{category}">
       </div>
       <div class="input-container">
-        <p class="error-message" th:errors="*{username}"></p>
-        <input type="text" placeholder="Username" th:field="*{username}">
-        <p class="error-message" th:errors="*{password}"></p>
-        <input type="text" placeholder="Password" th:field="*{password}">
-        <p class="error-message" th:errors="*{password}"></p>
-        <input type="text" placeholder="Confirm Password" th:field="*{password}">
+        <p class="error-message" th:errors="*{image}"></p>
+        <input type="text" placeholder="Image" th:field="*{image}">
+        <p class="error-message" th:errors="*{description}"></p>
+        <input type="text" placeholder="Description" th:field="*{description}">
+        
       </div>
-      <div>
-        <p class="error-message" th:errors="*{address1}"></p>
-        <input type="text" placeholder="Address1" th:field="*{address1}">        
+      <div class="input-container">
+        <p class="error-message" th:errors="*{stars}"></p>
+        <input type="text" placeholder="Stars" th:field="*{stars}">
+        <p class="error-message" th:errors="*{quantityInStock}"></p>
+        <input type="text" placeholder="Quantity In Stock" th:field="*{quantityInStock}">        
       </div>   
       <div class="input-container">
-        <input type="text" placeholder="Address2" th:field="*{address2}">
+        <p class="error-message" th:errors="*{ratingCount}"></p>
+        <input type="text" placeholder="Rating Count" th:field="*{ratingCount}">
+        <p class="error-message" th:errors="*{price}"></p>
+        <input type="text" placeholder="Price" th:field="*{price}">
       </div>
-      <div class="input-container">
-        <p class="error-message" th:errors="*{city}"></p>
-        <input type="text" placeholder="City" th:field="*{city}">
-        <p class="error-message" th:errors="*{state}"></p>
-        <input type="text" placeholder="State" th:field="*{state}">
-      </div>
-      <div class="input-container">
-        <p class="error-message" th:errors="*{postalCode}"></p>
-        <input type="text" placeholder="Zip Code" th:field="*{postalCode}">
-        <p class="error-message" th:errors="*{country}"></p>
-        <input type="text" placeholder="Country" th:field="*{country}">
-      </div>
-      <div class="input-container">
-        <p class="error-message" th:errors="*{email}"></p>
-        <input type="text" placeholder="Email" th:field="*{email}">
-        <p class="error-message" th:errors="*{phone}" ></p>
-        <input type="text" placeholder="Phone" th:field="*{phone}">
-        <p style="font-weight: bold">Date of Birth</p>
-        <p style="color: red" th:errors="*{dateOfBirth}"> </p>
-        <input type="date" th:field="*{dateOfBirth}"> <br><br>
-      </div>
+      
      
-      <div class="input-container">
-      </div>
-        <input type="submit" value="Submit" class="login-form-submit">
-      </div>
+      <div style="display:block; text-align:center;">
+        <input  type="submit" value="Submit" class="login-form-submit">
+    </div>
+       
+      
 
     </form>
 

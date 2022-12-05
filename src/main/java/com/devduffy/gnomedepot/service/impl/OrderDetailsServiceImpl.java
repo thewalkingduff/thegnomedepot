@@ -1,6 +1,9 @@
-package com.devduffy.gnomedepot.service;
+package com.devduffy.gnomedepot.service.impl;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.devduffy.gnomedepot.Constants;
 import com.devduffy.gnomedepot.entity.Order;
@@ -8,7 +11,13 @@ import com.devduffy.gnomedepot.entity.OrderDetails;
 import com.devduffy.gnomedepot.entity.User;
 import com.devduffy.gnomedepot.exception.OrderNotFoundException;
 import com.devduffy.gnomedepot.repository.OrderDetailsRepository;
+import com.devduffy.gnomedepot.service.OrderDetailsService;
+import com.devduffy.gnomedepot.service.Product;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
+@Service
 public class OrderDetailsServiceImpl implements OrderDetailsService{
 
     @Autowired
@@ -25,4 +34,24 @@ public class OrderDetailsServiceImpl implements OrderDetailsService{
         } 
         orderDetailsRepository.save(orderDetails);
     }
+
+    // @Override
+    // public List<Product> getAllProducts(Order order) {
+    //     List<Product> cartItems = orderDetailsRepository.findAllProduct();
+    //     return cartItems.stream()
+    //         .filter(e -> e.getOrder());
+    // }
+
+    // @Override
+    // public List<Product> getAllProducts() {
+    //     // TODO Auto-generated method stub
+    //     return orderDetailsRepository.findAllProduct();
+    // }
+
+    // @Override
+    // public Product getProduct() {
+    //     return orderDetailsRepository.findProduct();
+    // }
+
+   
 }

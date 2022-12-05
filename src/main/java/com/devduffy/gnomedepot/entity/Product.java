@@ -9,6 +9,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
+import com.devduffy.gnomedepot.dto.ProductDTO;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -56,4 +58,10 @@ public class Product {
 	@Min(1)
 	@Column(name="price")
 	private Double price;
+
+	public ProductDTO toDTO () {
+        return new ProductDTO(id, name, category, image, description, stars,
+        quantityInStock, ratingCount, price);
+    }
+	
 }

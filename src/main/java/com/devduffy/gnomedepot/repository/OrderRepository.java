@@ -7,10 +7,15 @@ import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
 
 import com.devduffy.gnomedepot.entity.Order;
+import com.devduffy.gnomedepot.entity.Product;
+import com.devduffy.gnomedepot.entity.User;
 
 public interface OrderRepository extends CrudRepository<Order, Integer>{
     List<Order> findByUserId(Integer userId);
     Optional<Order> findById(Integer id);
     void deleteById(Integer orderId);
     List<Order> findAll();
+    Order findOrderByUser(User user);
+    // List<Product> findAllProducts(Order order);
+    // List<Product> findByProducts(User user, Order orderId);
 }

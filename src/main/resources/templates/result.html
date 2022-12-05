@@ -1,12 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Result</title>
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head> 
+    <title>Form Submission Result</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    <h1>Success</h1>
+	<h1>Result</h1>
+    <p th:text="'id: ' + ${product.id}" />
+    <p th:text="'Name: ' + ${product.name}" />
+    <p th:text="'category: ' + ${product.category}" />
+    <p th:text="'image: ' + ${product.image}" />
+    <p th:text="'description: ' + ${product.description}" />
+    <p th:text="'stars: ' + ${product.stars}" />
+    <p th:text="'quantityInStock: ' + ${product.quantityInStock}" />
+    <p th:text="'ratingCount: ' + ${product.ratingCount}" />
+    <p th:text="'price: ' + ${product.price}" />
+    <a th:href="@{/product/create}">Submit another product</a>
 </body>
 </html>

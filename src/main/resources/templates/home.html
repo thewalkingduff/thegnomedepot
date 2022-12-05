@@ -1,5 +1,4 @@
 <div th:insert="fragments/header :: header"></div>
-
 <div class="dropdown">
   <label for="categories"></label>
   <select name="categories" id="categories" onchange="loadCategoryProducts(this)">
@@ -16,7 +15,6 @@
 
       <div class="product-card" th:each="product: ${products}">
 
-
         <a width="300px" height="500px" th:href="@{/productDetails(id = ${product.id})}">
           <img th:src="@{*{product.image}}" alt="" width="300px">
         </a>
@@ -28,40 +26,26 @@
           <p class="product-stars" th:text="*{product.stars} + ' ' + *{product.ratingCount}">
 
           </p>
-          <p [[starGenerator(*{product.stars})]]>
-
-          </p>
+       
           <p class="margin" th:text="*{product.price}">
           </p>
 
-          <p th:text="*{product.price}"></p>
+          <!-- <p th:text="*{product.price}"></p>
           <select id="quantity">
             <option th:value="1">1</option>
             <option th:value="2">2</option>
             <option th:value="3">3</option>
             <option th:value="4">4</option>
             <option th:value="5">5</option>
-          </select>
-          <a th:href="@{/order/addToCart(id=${product.id})}" class="btn btn-lg btn-outline-info btn-block">Add to Cart</a>
+          </select> -->
+          <!-- <a th:href="@{/order/addToCart(id=${product.id})}" class="btn btn-lg btn-outline-info btn-block">Add to Cart</a> -->
+          <a 
+          th:href="@{/cart/add(id=${product.id})}"
+          class="add-cart-button"
+          >
+          Add to Cart
+      </a>
         </div>
-
-        <!-- <form method="post" th:action="@{/cart/add}" th:object="${cartItem}">
-          <input id="product" required th:field="*{product}" hidden/>
-          <select id="quantity" required th:field="*{quantity}">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
-          <input type="submit" value="Add to cart">
-      </form> -->
-
-        
-          
-        
-
-
       </div>
     </div>
   </section>

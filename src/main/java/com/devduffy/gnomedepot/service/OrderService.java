@@ -14,4 +14,7 @@ public interface OrderService {
     List<Order> getAllOrdersOfUser(Integer id);
     List<Order> getAllOrders();
     void addToCart(Product product, Order order, User user);
+    // List<Product> getProductsInOrder(User user, Order orderId);
+    Order getOrderByUser(User user);
+   
 }

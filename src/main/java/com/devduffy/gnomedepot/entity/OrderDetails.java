@@ -14,11 +14,16 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 
+import com.devduffy.gnomedepot.dto.OrderDTO;
+import com.devduffy.gnomedepot.dto.OrderDetailsDTO;
+import com.devduffy.gnomedepot.dto.ProductDTO;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
 @Getter
 @Setter
 @ToString
@@ -50,5 +55,9 @@ public class OrderDetails {
     @Min(0)
     @Column(name="total")
     private Double total;
+
+    public OrderDetailsDTO toDTO () {
+		return new OrderDetailsDTO(id, order.toDTO(), product.toDTO(), quantity, total);
+	}
     
 }

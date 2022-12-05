@@ -70,19 +70,34 @@ option {
     opacity: 100% !important; 
     cursor: pointer;
 }
+.cart-login-container {
+
+}
 .cart-container {
     margin: 1rem 1.25rem ;
     color: #F96302;
+    text-align: right;
 }
 .shopping-cart {
     color: #F96302;
     font-size: 2.25rem;
     opacity: 100%;
 }
-.movies-link {
+.login-status {
+    margin: 0;
+    color: #333;
+    text-align: right;
+    margin-right: 1rem;
+}
+.admin-menu {
+    
+}
+.admin-menu ul li {
+    list-style: none;
+}
+.admin-menu ul li a {
     text-decoration: none;
-    color: #F96302;
-    font-size: 1rem;
+    color: #333;
 }
 .footer {
   position:fixed;

@@ -1,5 +1,6 @@
 package com.devduffy.gnomedepot.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -22,6 +23,8 @@ import javax.validation.constraints.Past;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.devduffy.gnomedepot.dto.OrderDTO;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,6 +39,9 @@ import lombok.ToString;
 @Entity
 @Table(name = "orders")
 public class Order {
+
+		public Order(Integer id2, User model, Date orderDate2, String status2, Date shippedDate2) {
+    }
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,6 +69,14 @@ public class Order {
         @JoinTable(name = "orderdetails", joinColumns = {
                         @JoinColumn(name = "orders_id", referencedColumnName = "id", nullable = false, updatable = false) }, inverseJoinColumns = {
                                         @JoinColumn(name = "products_id", referencedColumnName = "id", nullable = false, updatable = false) })
-        private Set<Product> products = new HashSet<>();
+        private List<Product> products = new ArrayList<>();
+
+        public Order(Integer id2, User model) {
+        }
+
+        public OrderDTO toDTO() {
+          return new OrderDTO(id, user.toDTO(), orderDate, status, shippedDate);
+        }
+        
 
 }

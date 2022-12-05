@@ -7,6 +7,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 
+
 public class UsernameValidator implements ConstraintValidator<Username, String> {
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {

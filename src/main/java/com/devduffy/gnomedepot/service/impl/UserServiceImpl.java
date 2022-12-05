@@ -1,4 +1,4 @@
-package com.devduffy.gnomedepot.service;
+package com.devduffy.gnomedepot.service.impl;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,6 +10,7 @@ import com.devduffy.gnomedepot.entity.Order;
 import com.devduffy.gnomedepot.entity.User;
 import com.devduffy.gnomedepot.exception.UserNotFoundException;
 import com.devduffy.gnomedepot.repository.UserRepository;
+import com.devduffy.gnomedepot.service.UserService;
 
 import lombok.AllArgsConstructor;
 
@@ -41,7 +42,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Set<Order> getOrders(Integer id) {
+    public List<Order> getOrders(Integer id) {
         User user = getUser(id);
         return user.getOrders();
     }

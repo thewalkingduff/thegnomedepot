@@ -1,4 +1,4 @@
-package com.devduffy.gnomedepot.service;
+package com.devduffy.gnomedepot.service.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,6 +18,7 @@ import com.devduffy.gnomedepot.exception.OrderNotFoundException;
 import com.devduffy.gnomedepot.repository.OrderRepository;
 import com.devduffy.gnomedepot.repository.ProductRepository;
 import com.devduffy.gnomedepot.repository.UserRepository;
+import com.devduffy.gnomedepot.service.OrderService;
 
 import lombok.AllArgsConstructor;
 
@@ -59,7 +60,8 @@ public class OrderServiceImpl implements OrderService {
         order.setUser(user);
         order.setStatus("processing");
         order.setOrderDate(new Date());
-		orderRepository.save(order);	
+        order.getProducts().add(product);
+		// orderRepository.save(order);	
 	}
 
 	@Override
@@ -67,4 +69,20 @@ public class OrderServiceImpl implements OrderService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+    @Override
+    public Order getOrderByUser(User user) {
+        return orderRepository.findOrderByUser(user);
+    }
+
+    
+
+    
+
+    
+    // @Override
+    // public List<Product> getProductsInOrder(User user, Order orderId) {
+    //     // TODO Auto-generated method stub
+    //     return orderRepository.findByProducts(user, orderId);
+    // }
 }
