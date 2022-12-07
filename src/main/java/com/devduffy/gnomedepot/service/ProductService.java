@@ -9,7 +9,7 @@ import com.devduffy.gnomedepot.entity.Product;
 
 public interface ProductService {
     Product getProduct(Integer id);
-    List<Product> getProducts();
+    List<Product> getAllProducts();
     void saveProduct(Product product);
     // @Transactional
     // List<Product> getByName(String name);

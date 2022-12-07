@@ -33,19 +33,19 @@ import lombok.ToString;
 @Table(name="orderdetails")
 public class OrderDetails {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
-	private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
+    private Integer id;
 
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name="orders_id", nullable=false)
+    @JoinColumn(name = "orders_id", nullable = false)
     private Order order;
 
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name="products_id", nullable=false)
+    @JoinColumn(name = "products_id", nullable = false)
     private Product product;
 
     @Min(0)

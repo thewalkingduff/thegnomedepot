@@ -1,71 +1,80 @@
 <div th:insert="fragments/header :: header"></div>
 <style>
-    /* body {
+  /* body {
       text-align: center;
       padding: 40px 0;
       background: #EBF0F5;
     } */
-      h1 {
-        color: #F96302;
-        font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
-        font-weight: 900;
-        font-size: 40px;
-        margin-bottom: 10px;
-      }
-      .welcome-text {
-        color: #333333;
-        font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
-        font-size:20px;
-        margin: 0;
-      }
-    .checkmark {
-      color: #F96302;
-      font-size: 100px;
-      line-height: 200px;
-      margin-left:-15px;
-    }
-    .success-container {
-      /* display: grid;
+  h1 {
+    color: #F96302;
+    font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+    font-weight: 900;
+    font-size: 40px;
+    margin-bottom: 10px;
+  }
+
+  .welcome-text {
+    color: #333333;
+    font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+    font-size: 20px;
+    margin: 0;
+  }
+
+  .checkmark {
+    color: #F96302;
+    font-size: 100px;
+    line-height: 200px;
+    margin-left: -15px;
+  }
+
+  .success-container {
+    /* display: grid;
       justify-items: center;
       align-items: center; */
-      text-align: center;
-    }
-    .start-shopping-text {
-      text-decoration: none;
-      color: #F96302;
-      font-weight: 700;
-      font-size: 1.5rem;
-      opacity: 85%;
-    }
-    .start-shopping-text:hover {
-      text-decoration: none;
-      color: #F96302;
-      font-weight: 700;
-      font-size: 1.5rem;
-      opacity: 100%;
-    }
-    .card {
-      background: white;
-      padding: 60px;
-      border-radius: 4px;
-      box-shadow: 0 2px 3px #C8D0D8;
-      display: inline-block;
-      margin: 0 auto;
-    }
-  </style>
-<div class="success-container">
-    <h1>Success!</h1>
-    
-     <div class="card">
-        <div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
-          <i class="checkmark">✓</i>
-        </div>
-          <h1>Success</h1> 
-          <p class="welcome-text">Welcome to Gnome Depot!<br/>
-            <a th:href="@{/}" class="start-shopping-text">
-            Click Here to Start Shopping!
-            </a>
-          </p>
-        </div>
-</div>
+    text-align: center;
+  }
+
+  .start-shopping-text {
+    text-decoration: none;
+    color: #F96302;
+    font-weight: 700;
+    font-size: 1.5rem;
+    opacity: 85%;
+  }
+
+  .start-shopping-text:hover {
+    text-decoration: none;
+    color: #F96302;
+    font-weight: 700;
+    font-size: 1.5rem;
+    opacity: 100%;
+  }
+
+  .card {
+    background: white;
+    padding: 60px;
+    border-radius: 4px;
+    box-shadow: 0 2px 3px #C8D0D8;
+    display: inline-block;
+    margin: 0 auto;
+  }
+</style>
+<section>
+  <div class="success-container">
+    <h1>Complete!</h1>
+  
+    <div class="card">
+      <div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
+        <i class="checkmark">✓</i>
+      </div>
+      <h1>Success</h1>
+      <p class="welcome-text">Welcome to Gnome Depot! <br>
+        <a th:href="@{/}" class="start-shopping-text">
+          Continue
+        </a>
+      </p>
+    </div>
+  </div>
+</section>
+
 <div th:insert="fragments/footer :: footer"></div>

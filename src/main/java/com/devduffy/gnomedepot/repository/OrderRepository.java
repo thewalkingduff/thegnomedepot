@@ -11,11 +11,12 @@ import com.devduffy.gnomedepot.entity.Product;
 import com.devduffy.gnomedepot.entity.User;
 
 public interface OrderRepository extends CrudRepository<Order, Integer>{
-    List<Order> findByUserId(Integer userId);
+
     Optional<Order> findById(Integer id);
     void deleteById(Integer orderId);
     List<Order> findAll();
     Order findOrderByUser(User user);
+    List<Order> findByUser(User user);
     // List<Product> findAllProducts(Order order);
     // List<Product> findByProducts(User user, Order orderId);
 }

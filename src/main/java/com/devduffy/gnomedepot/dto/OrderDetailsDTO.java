@@ -17,8 +17,8 @@ public class OrderDetailsDTO {
 	private Integer quantity;
 	private Double total;
 
-	public OrderDetails toModel () {
-		return new OrderDetails(id, orderDTO.toModel(), productDTO.toModel()
-				, quantity, total);
-	}
+	// public OrderDetails toModel () {
+	// 	return new OrderDetails(id, orderDTO.toModel(), productDTO.toModel()
+	// 			, quantity, total);
+	// }
 }

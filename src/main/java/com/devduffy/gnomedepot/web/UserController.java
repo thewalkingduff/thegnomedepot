@@ -63,6 +63,7 @@ public class UserController {
     @PostMapping("/user/register")
     public String createUser(@Valid CreateUserForm form, BindingResult result) {
         if(form.getLastName().equals(form.getFirstName())) result.rejectValue("lastName", "", "Last name can not equal first name.");
+        if(!(form.getPassword().equals(form.getConfirmPassword()))) result.rejectValue("confirmPassword", "", "Passwords do not match. Please try again.");
         
         if(result.hasErrors()) return "register";
 

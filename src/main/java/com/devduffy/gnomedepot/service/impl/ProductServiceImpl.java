@@ -24,8 +24,8 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public List<Product> getProducts() {
-        return (List<Product>)productRepository.findAll();
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
     }
 
     static Product unwrapProduct(Optional<Product> entity, Integer id) {

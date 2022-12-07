@@ -64,13 +64,6 @@ public class Order {
         @JoinColumn(name = "users_id", nullable = false)
         private User user;
 
-        @ToString.Exclude
-        @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-        @JoinTable(name = "orderdetails", joinColumns = {
-                        @JoinColumn(name = "orders_id", referencedColumnName = "id", nullable = false, updatable = false) }, inverseJoinColumns = {
-                                        @JoinColumn(name = "products_id", referencedColumnName = "id", nullable = false, updatable = false) })
-        private List<Product> products = new ArrayList<>();
-
         public Order(Integer id2, User model) {
         }
 

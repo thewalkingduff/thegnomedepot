@@ -11,10 +11,11 @@ public interface OrderService {
     Order createOrder(Order order);
     Order getOrderByOrderId(Integer orderId);
     void deleteOrder(Order order);
-    List<Order> getAllOrdersOfUser(Integer id);
+    List<Order> getListOrderOfUser(User user);
     List<Order> getAllOrders();
     void addToCart(Product product, Order order, User user);
     // List<Product> getProductsInOrder(User user, Order orderId);
     Order getOrderByUser(User user);
+    void saveOrder(Order order);
    
 }

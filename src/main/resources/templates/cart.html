@@ -1,8 +1,41 @@
 <div th:insert="fragments/header :: header"></div>
-
-    <h1>Cart Page</h1>
-    <ul th:each="product: ${productsInCart}">
-        <li th:text="*{product.name}"></li>
-    </ul>
-</body>
-</html>
+<section class="cart-main-container">
+    <div>
+        <h1>Shopping Cart</h1>
+    </div>
+    <div class="cart-image-items-container" th:each="od: ${orderDetails}">
+        <div>
+            <img th:src="*{od.product.image}" alt="" width="180px">
+        </div>
+        <div class="cart-items-container">
+            <ul>
+                <li th:text="*{od.product.name}" class="cart-item-li"></li>
+                <li th:text="*{od.quantity}" class="cart-item-li"></li>
+                <li th:text="*{od.total}" class="cart-item-li"></li>
+            </ul>
+            
+            <label for="quantity">Qty:<span aria-label='Quantity'></span></label>
+            <select name="quantity" id="quantity">
+                <option value="0" >
+                    0 (Delete)
+                </option>
+                <option value="1" selected>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10+</option>
+            </select>
+            <a  th:href="@{/cart/delete(productId=${od.product.id})}" class="teal-text">Delete</a>
+            
+                
+        </div>
+    </div>
+    <hr>
+    <h6>Subtotal: <span th:text=" '(' + ${totalProductsInCart} + ' items): ' + ${#numbers.formatCurrency(orderTotal)} "></span></h6>
+</section>
+<div th:insert="fragments/footer :: footer"></div>

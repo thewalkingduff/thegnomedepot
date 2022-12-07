@@ -1,0 +1,32 @@
+hr {
+    width: 75%;
+}
+.cart-main-container {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    background: #fff;
+    margin: 1rem;
+    padding: 1rem 0;
+}
+.cart-image-items-container {
+    display: flex;
+    /* gap: 1rem; */
+    width: 50rem;
+    margin: 1rem;
+}
+.cart-items-container {
+    text-align: left;
+    margin-left: 1rem;
+}
+.cart-item-li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    color: #333333;
+}
+.teal-text {
+    color:#007185;
+    text-decoration:none;
+    margin: 0rem 1rem;
+}

@@ -137,3 +137,6 @@ form {
   color: red;
   margin: 0;
 }
+.success-container {
+  margin-top: 1rem;
+}
