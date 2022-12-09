@@ -56,8 +56,8 @@ public class OrderDetails {
     @Column(name="total")
     private Double total;
 
-    public OrderDetailsDTO toDTO () {
-		return new OrderDetailsDTO(id, order.toDTO(), product.toDTO(), quantity, total);
-	}
+    // public OrderDetailsDTO toDTO () {
+		// return new OrderDetailsDTO(id, order.toDTO(), product.toDTO(), quantity, total);
+	// }
     
 }

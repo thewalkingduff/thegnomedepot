@@ -1,6 +1,7 @@
 package com.devduffy.gnomedepot.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,31 +58,23 @@ public class OrderDetailsServiceImpl implements OrderDetailsService{
 
 
 
-   
+    @Override
+    public void deleteProductFromCart(Integer id) {
+        orderDetailsRepository.deleteById(id);
+    }
 
 
 
-   
+    @Override
+    public OrderDetails getByOrderDetailsId(Integer id) {
+        // TODO Auto-generated method stub
+        return orderDetailsRepository.findByOrderDetailsId(id);
+    }
 
-   
 
-    // @Override
-    // public List<Product> getAllProducts(Order order) {
-    //     List<Product> cartItems = orderDetailsRepository.findAllProduct();
-    //     return cartItems.stream()
-    //         .filter(e -> e.getOrder());
-    // }
 
-    // @Override
-    // public List<Product> getAllProducts() {
-    //     // TODO Auto-generated method stub
-    //     return orderDetailsRepository.findAllProduct();
-    // }
+    
 
-    // @Override
-    // public Product getProduct() {
-    //     return orderDetailsRepository.findProduct();
-    // }
 
-   
+  
 }

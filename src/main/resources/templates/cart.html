@@ -1,41 +1,79 @@
 <div th:insert="fragments/header :: header"></div>
-<section class="cart-main-container">
-    <div>
-        <h1>Shopping Cart</h1>
-    </div>
-    <div class="cart-image-items-container" th:each="od: ${orderDetails}">
-        <div>
-            <img th:src="*{od.product.image}" alt="" width="180px">
+<main class="cart-main-container">
+    <section class="cart-image-details-container">
+        <div class="cart-header-price-container">
+            <div class="cart-header">
+                <div>
+                    <h1 class="cart-header-text">Shopping Cart</h1>
+                </div>
+
+            </div>
+            <div class="cart-price-container">
+                <h6 class="cart-price-header">Price</h6>
+            </div>
         </div>
-        <div class="cart-items-container">
-            <ul>
-                <li th:text="*{od.product.name}" class="cart-item-li"></li>
-                <li th:text="*{od.quantity}" class="cart-item-li"></li>
-                <li th:text="*{od.total}" class="cart-item-li"></li>
-            </ul>
+        <hr>
+        <form method="post" th:object="${cartItem}" th:action="@{/cart}" th:each="od: ${orderDetails}">
+            <div class="cart-image-details-price-container">
+                <div>
+                    <img th:src="${od.product.image}" alt="" width="180px">
+                </div>
+
+                <div class="cart-product-list">
+                    <input type="hidden" th:name="id" th:value="${od.id}" />
+                    <div>
+                        <a th:href="@{/product/details(id = ${od.product.id})}" class="light-black-text">
+                            <span th:utext="${od.product.name}"></span>
+                        </a>
+                    </div>
+                    <p class="in-stock-text">In Stock</p>
+                    <div class="cart-quantity-container">
+                        <select th:name="quantity" th:value="${od.quantity}" onchange="this.form.submit()">
+                            <option th:value="${od.quantity}" th:text="${od.quantity}" selected></option>
+                            <option th:each="i : ${#numbers.sequence(0, 20)}" th:value="${i}" th:text="${i}">
+                            </option>
+                        </select>
+                        <div>
+                            <i class="icon-text-separator" role="img" aria-label="|"></i>
+                            <a th:href="@{/cart/remove(id=${od.id})}" class="teal-text">
+                                Delete
+                            </a>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="price-column-container">
+                    <span class="subtotal-price-text" th:utext="${#numbers.formatCurrency(od.total)}">
+                    </span>
+                </div>
+            </div>
+        </form>
+        <hr>
+    </section>
+    <section class="checkout-button-subtotal-container">
+        <div class="justify-items-start">
+            <div>
+                <h6 class="subtotal-text">Subtotal: <span th:text=" '(' + ${totalProductsInCart} + ' items): '"></span>
+                    <span th:text="${#numbers.formatCurrency(orderTotal)}" class="subtotal-price-text">
+
+                    </span>
+                </h6>
+            </div>
+            <div>
+                <a th:href="@{/cart/checkout}" class="checkout-btn">Proceed to checkout</a>
+            </div>
+        </div>  
+        <hr style="margin-top: 2rem;">
+        <div class="justify-items-start margin-continue">
             
-            <label for="quantity">Qty:<span aria-label='Quantity'></span></label>
-            <select name="quantity" id="quantity">
-                <option value="0" >
-                    0 (Delete)
-                </option>
-                <option value="1" selected>1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10+</option>
-            </select>
-            <a  th:href="@{/cart/delete(productId=${od.product.id})}" class="teal-text">Delete</a>
-            
-                
-        </div>
-    </div>
-    <hr>
-    <h6>Subtotal: <span th:text=" '(' + ${totalProductsInCart} + ' items): ' + ${#numbers.formatCurrency(orderTotal)} "></span></h6>
-</section>
+            <div>
+                <a th:href="@{/}" class="continue-shopping-btn">Continue shopping</a>
+            </div>
+        </div>  
+    </section>
+    
+   
+
+</main>
+
 <div th:insert="fragments/footer :: footer"></div>

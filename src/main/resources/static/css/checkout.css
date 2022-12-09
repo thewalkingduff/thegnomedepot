@@ -1,0 +1,35 @@
+.navbar-checkout {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem;
+    background: #fff;
+    margin: 0;
+}
+.lock-icon-div {
+    margin-right: 5rem;
+}
+.fa-lock {
+    color: #999999;
+    font-size: 22px;
+}
+.checkout-header {
+    font-size: 28px;
+    color: #0F1111;
+}
+.teal-text {
+    color: #017185;
+}
+.shipping-container {
+    display: flex;
+    justify-content: flex-start;
+    gap: 3rem;
+}
+.user-shipping-text {
+    margin: 0;
+}
+.payment-container {
+    display: flex;
+    justify-content: flex-start;
+    gap: 3rem;
+}

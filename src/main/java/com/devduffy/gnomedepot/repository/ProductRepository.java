@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.devduffy.gnomedepot.entity.Product;
 
 @Repository
-public interface ProductRepository extends CrudRepository<Product, Integer> {
+public interface ProductRepository extends CrudRepository<Product, Long> {
 	// @Query("SELECT p FROM Product p where p.name = :name")
 	// public List<Product> findByProductName(String name);
 

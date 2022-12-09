@@ -95,9 +95,12 @@ option {
 .admin-menu ul li {
     list-style: none;
 }
-.admin-menu ul li a {
+.light-black-text {
     text-decoration: none;
     color: #333;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 1rem 0;
 }
 .footer {
   position:fixed;
@@ -116,4 +119,7 @@ option {
 a.menu:hover {
   background-color:yellow;
   font-size:20px;
+}
+.product-details-text {
+    margin: 0;
 }

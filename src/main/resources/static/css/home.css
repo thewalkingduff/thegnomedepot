@@ -11,15 +11,21 @@
     gap: 1rem;
     margin: 0 1.65rem;
 }
+.product-img-home-container {
+    margin-top: 10px;
+}
 .product-card {
     display: grid;
     justify-items: center;
+    align-items: center;
     background: #fff;
+   
 }
 .product-card-details {
     display: grid;
+    justify-items: center;
     width: 100%;
-    height: 300px;
+    height: 250px;
     gap: 0;
 }
 .product-name {
@@ -29,9 +35,13 @@
 }
 .product-name-text {
     margin: 0rem;
+    font-size: 1rem;
 }
 .margin {
     margin: 1rem 1.65rem 0;
+}
+.add-btn-container-home {
+  
 }
 .add-cart-button {
     text-decoration: none;
@@ -39,10 +49,12 @@
     color: #F96302;
     padding: .5rem 7.5rem;
     border-radius: 4px;
-    margin: 1rem .55rem;
+    margin: .75rem .55rem;
     font-weight: 700;
     font-size: 1.15rem;
     white-space: nowrap;
+    height: 3rem;
+    text-align: center;  
 }
 .add-cart-button:hover {
     color: #fff;

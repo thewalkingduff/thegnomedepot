@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.devduffy.gnomedepot.entity.User;
 
-public interface UserRepository extends CrudRepository<User, Integer>{
+public interface UserRepository extends CrudRepository<User, Long>{
     Optional<User> findById(Integer id);
     User findByUsername(String username);
     List<User> findByFirstNameAndLastNameIgnoreCase(String firstname, String lastname);

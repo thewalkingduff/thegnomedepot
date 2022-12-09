@@ -1,6 +1,7 @@
 package com.devduffy.gnomedepot.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.devduffy.gnomedepot.entity.Order;
 import com.devduffy.gnomedepot.entity.OrderDetails;
@@ -13,5 +14,7 @@ public interface OrderDetailsService {
     void save(OrderDetails orderDetails);
     List<OrderDetails> getByOrder(Order order);
     OrderDetails getByOrderAndProduct(Integer orderId, Integer productId);
-    // OrderDetails getByOrder(Integer orderId);
+    // OrderDetails getById(Integer id);
+    void deleteProductFromCart(Integer id);
+    OrderDetails getByOrderDetailsId(Integer id);
 }

@@ -9,7 +9,7 @@ import com.devduffy.gnomedepot.entity.User;
 public interface UserService {
     User getUser(Integer id);
     User saveUser(User user);
-    void deleteUser(Integer id);
+    void deleteUser(Long id);
     List<User> getUsers();
     List<Order> getOrders(Integer id);
     User getUserByEmail(String email);

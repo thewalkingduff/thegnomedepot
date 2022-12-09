@@ -10,7 +10,7 @@ import com.devduffy.gnomedepot.entity.Order;
 import com.devduffy.gnomedepot.entity.Product;
 import com.devduffy.gnomedepot.entity.User;
 
-public interface OrderRepository extends CrudRepository<Order, Integer>{
+public interface OrderRepository extends CrudRepository<Order, Long>{
 
     Optional<Order> findById(Integer id);
     void deleteById(Integer orderId);
