@@ -59,7 +59,7 @@ public class OrderDetailsServiceImpl implements OrderDetailsService{
 
 
     @Override
-    public void deleteProductFromCart(Integer id) {
+    public void deleteProductFromOrder(Integer id) {
         orderDetailsRepository.deleteById(id);
     }
 

@@ -9,7 +9,7 @@ import com.devduffy.gnomedepot.entity.User;
 
 public interface OrderService {
     Order createOrder(Order order);
-    Order getOrderByOrderId(Integer orderId);
+    Order getOrderById(Integer id);
     void deleteOrder(Order order);
     List<Order> getListOrderOfUser(User user);
     List<Order> getAllOrders();
@@ -17,5 +17,7 @@ public interface OrderService {
     // List<Product> getProductsInOrder(User user, Order orderId);
     Order getOrderByUser(User user);
     void saveOrder(Order order);
+    Order getCurrentOrderOrNewOrder(User user);
+   
    
 }

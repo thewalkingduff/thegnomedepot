@@ -19,6 +19,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Past;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -31,8 +32,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter
-@Setter
+
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
@@ -59,6 +59,10 @@ public class Order {
         @DateTimeFormat(pattern = "yyyy-MM-dd")
         private Date shippedDate;
 
+    
+        @Column(name="total_amount")
+        private Double totalAmount;
+
         @ToString.Exclude
         @ManyToOne(fetch = FetchType.LAZY, optional = false)
         @JoinColumn(name = "users_id", nullable = false)
@@ -70,6 +74,55 @@ public class Order {
         public OrderDTO toDTO() {
           return new OrderDTO(id, user.toDTO(), orderDate, status, shippedDate);
         }
+
+
+  public Integer getId() {
+    return this.id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  public Date getOrderDate() {
+    return this.orderDate;
+  }
+
+  public void setOrderDate(Date orderDate) {
+    this.orderDate = orderDate;
+  }
+
+  public String getStatus() {
+    return this.status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
+  }
+
+  public Date getShippedDate() {
+    return this.shippedDate;
+  }
+
+  public void setShippedDate(Date shippedDate) {
+    this.shippedDate = shippedDate;
+  }
+
+  public Double getTotalAmount() {
+    return this.totalAmount;
+  }
+
+  public void setTotalAmount(Double totalAmount) {
+    this.totalAmount = totalAmount;
+  }
+
+  public User getUser() {
+    return this.user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
+  }
         
 
 }

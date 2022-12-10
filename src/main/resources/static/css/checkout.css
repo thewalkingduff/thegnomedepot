@@ -1,9 +1,11 @@
-.navbar-checkout {
+body {
+    background: #fff;
+}.navbar-checkout {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 1rem;
-    background: #fff;
+    background-image: linear-gradient(to right top, #f3f3f3, #f6f6f6, #f9f9f9, #fcfcfc, #ffffff);
     margin: 0;
 }
 .lock-icon-div {
@@ -17,6 +19,11 @@
     font-size: 28px;
     color: #0F1111;
 }
+.checkout-main-container {
+    display: grid;
+    grid-template-columns: 70% 30%;
+    align-items: start;
+}
 .teal-text {
     color: #017185;
 }
@@ -28,8 +35,88 @@
 .user-shipping-text {
     margin: 0;
 }
+.checkout-product-list {
+    list-style-type: none;
+    display: grid;
+    align-items: flex-start;
+}
 .payment-container {
     display: flex;
     justify-content: flex-start;
     gap: 3rem;
+}
+.checkout-product-details-main-container {
+    
+}
+.checkout-product-container {
+    background: #fff;
+    margin: 1rem;
+    padding: 1rem 0;
+    border: 1px solid #D5D9D9;
+    border-radius: 5px;
+}
+.checkout-price-text {
+    font-size: 14px;
+    color: #B12704;
+    font-weight: 700;
+}
+.submit-order-container {
+    margin: 0;
+}
+.submit-button-container {
+    margin: .75rem 0;
+    text-align: center;
+}
+.submit-order-button-subtotal-container {
+    background: #fff;
+    margin: 1rem;
+    padding: 2rem 1rem;
+    display: grid;
+    justify-items: center;
+    border: 1px solid #D5D9D9;
+    border-radius: 5px;
+    width: 285px;
+}
+.test {
+    display: grid;
+    align-items: flex-end;
+}
+.checkout-header {
+    color: #0F1111;
+    font-size: 18px;
+    font-weight: 700;
+}
+.order-summary-details {
+    color: #0F1111;
+    font-size: 12px;
+    line-height: 20px;
+}
+.privacy-notice-text {
+    color: #565959;
+    font-size: 12px; 
+    text-align: center;
+    margin: 0 0 .30rem;
+}
+.teal-text-checkout {
+    color:#007185;
+    text-decoration:none;
+    margin: 0rem;
+}
+.hr-above-products {
+    /* margin: 0rem 0 .5rem; */
+}
+.checkout-hr-bottom {
+    margin: .15rem 0 .85rem;
+}
+.hr-above-order-summary {
+    margin: 0 0 .75rem;
+}
+.subtotal-text {
+    font-size: 18px;
+    color: #B12704;
+    font-weight: 700;
+    line-height: 24px;
+}
+.subtotal-span {
+    margin-left: 5rem;
 }

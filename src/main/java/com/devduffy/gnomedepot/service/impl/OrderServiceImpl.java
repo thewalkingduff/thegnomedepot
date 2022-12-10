@@ -59,11 +59,7 @@ public class OrderServiceImpl implements OrderService {
 		// orderRepository.save(order);	
 	}
 
-	@Override
-	public Order getOrderByOrderId(Integer orderId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
     @Override
     public Order getOrderByUser(User user) {
@@ -78,6 +74,26 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order> getListOrderOfUser(User user) {
         return orderRepository.findByUser(user);
+    }
+
+    @Override
+    public Order getOrderById(Integer id) {
+       
+        return orderRepository.findByOrderId(id);
+    }
+
+    
+
+    @Override
+    public Order getCurrentOrderOrNewOrder(User user) {
+        List<Order> allUserOrders = getListOrderOfUser(user);
+        for (Order o : allUserOrders) {
+            String orderStatus = o.getStatus();
+            if( orderStatus.equals("pending")) {
+                return o;
+            }  
+        } 
+        return new Order();
     }
 
     

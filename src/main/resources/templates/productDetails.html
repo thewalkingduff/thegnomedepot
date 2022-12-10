@@ -21,7 +21,7 @@
 
       <div class="product-details-info-container">
         <p class="details-price" th:text="'$' + *{#numbers.formatCurrency(product.price)}"></p>
-        <form method="post" th:object="${cartItem}" th:action="@{/cart}">
+        <form method="post" th:object="${cartItem}" th:action="@{/order/update}">
           <div th:each="od: ${orderDetails}">
             <ul>
               <li><img th:src="${od.product.image}" alt="" width="180px">

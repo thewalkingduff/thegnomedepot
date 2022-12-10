@@ -33,10 +33,7 @@ public class IndexController {
 
     @GetMapping(value = { "/", "/index", "/index.html" })
     public String getAllProducts(Model model) {
-        // model.addAttribute("products", productService.getByName(productName));
-        log.info("simple log");
-        log.warn("This is a warning.");
-        model.addAttribute("products", productService.getByNameContaining("gnome"));
+        model.addAttribute("products", productService.getAllProducts());
         // if the user is authenticated
 		if ( authService.isAuthenticated() ) {
 
