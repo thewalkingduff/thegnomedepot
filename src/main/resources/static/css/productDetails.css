@@ -1,3 +1,13 @@
+.prod-details-main-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    margin: 2rem 4rem;
+}
+
+.prod-detail-image-container {
+    margin-right: 1rem;
+}
+
 .image-name-container {
     display: flex;
     background: #fff;

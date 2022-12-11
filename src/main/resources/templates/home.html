@@ -16,12 +16,14 @@
       <div class="product-card" th:each="product: ${products}">
         <div class="product-img-home-container">
           <a width="300px" height="500px" th:href="@{/product/details(id = ${product.id})}">
+          <!-- <a width="300px" height="500px" th:href="@{/product/details}"> -->
             <img th:src="@{*{product.image}}" alt="" width="180px">
           </a>
         </div>
         
         <div class="product-card-details">
           <a class="product-name" th:href="@{/product/details(id = ${product.id})}">
+          <!-- <a class="product-name" th:href="@{/product/details}"> -->
             <h4 class="product-name-text" th:text="*{product.name}">
             </h4>
           </a>

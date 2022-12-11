@@ -5,7 +5,8 @@
             <div class="cart-header">
                 <div>
                     <h1 th:if="${totalProductsInCart > 0} " class="cart-header-text">Shopping Cart </h1>
-                    <h1 th:unless="${totalProductsInCart > 0} " class="cart-header-text">Your Gnome Depot Cart is empty.</h1>
+                    <h1 th:unless="${totalProductsInCart > 0}" class="cart-header-text">Your Gnome Depot Cart is empty.</h1>
+                    <img th:unless="${totalProductsInCart > 0}" src="https://st3.depositphotos.com/5792148/13370/v/1600/depositphotos_133708566-stock-illustration-cartoon-sad-gnome.jpg" alt="" width="400px">
                 </div>
 
             </div>
@@ -17,7 +18,9 @@
         <form method="post" th:object="${cartItem}" th:action="@{/order/update}" th:each="od: ${orderDetails}">
             <div class="cart-image-details-price-container">
                 <div>
-                    <img th:src="${od.product.image}" alt="" width="180px">
+                    <a th:href="@{/product/details(id = ${od.product.id})}">
+                        <img th:src="${od.product.image}" alt="" width="180px">
+                    </a>  
                 </div>
 
                 <div class="cart-product-list">
@@ -61,7 +64,7 @@
                     </h6>
                 </div>
                 <div th:object="${order}">
-                    <a th:href="@{/order/checkout(id=${order.id})}" class="checkout-btn">Proceed to checkout</a>
+                    <a th:if="${totalProductsInCart > 0}" th:href="@{/order/checkout(id=${order.id})}" class="checkout-btn">Proceed to checkout</a>
                 </div>
             </div>  
             <hr style="margin-top: 2rem;">

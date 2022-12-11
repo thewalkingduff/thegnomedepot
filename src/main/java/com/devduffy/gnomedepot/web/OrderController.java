@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.devduffy.gnomedepot.Constants;
+import com.devduffy.gnomedepot.dto.CartItem;
 import com.devduffy.gnomedepot.entity.Order;
 import com.devduffy.gnomedepot.entity.OrderDetails;
 import com.devduffy.gnomedepot.entity.Product;
 import com.devduffy.gnomedepot.entity.User;
-import com.devduffy.gnomedepot.form.CartItem;
 import com.devduffy.gnomedepot.security.AuthenticatedUserService;
 import com.devduffy.gnomedepot.security.UserDetailsServiceImpl;
 import com.devduffy.gnomedepot.service.OrderDetailsService;
@@ -105,7 +105,7 @@ public class OrderController {
                // this is checking if product is in order. if it is, add 1 to quantity
                 if(orderDetailsService.getByOrderAndProduct(order.getId(), id) != null) {
                     orderDetails = orderDetailsService.getByOrderAndProduct(order.getId(), id);
-                    orderDetails.setQuantity(orderDetails.getQuantity() + 1);
+                    orderDetails.setQuantity(orderDetails.getQuantity());
                     orderDetails.setTotal(0.0);
                     orderDetails.setTotal(orderDetails.getTotal() + product.getPrice());
                     orderDetailsService.save(orderDetails);
@@ -153,7 +153,7 @@ public class OrderController {
     @Transactional
     @GetMapping("/order/delete")
     public String removeItemFromorder(Model model, @RequestParam("id") Integer id) {
-        orderDetailsService.deleteProductFromOrder(id);
+        orderDetailsService.deleteItemFromOrder(id);;
         return "redirect:/order/current";
     }
    
@@ -169,7 +169,7 @@ public class OrderController {
         OrderDetails product = orderDetailsService.getByOrderDetailsId(cartItem.getId());
         product.setQuantity(cartItem.getQuantity());
         if(product.getQuantity() == 0) {
-            orderDetailsService.deleteProductFromOrder(cartItem.getId());
+            orderDetailsService.deleteItemFromOrder(cartItem.getId());
         } else {
             orderDetailsService.save(product);
         }
@@ -179,7 +179,7 @@ public class OrderController {
 
     @Transactional
     @PostMapping("/order/checkout/update")
-    public String updateCheckoutOrder(@ModelAttribute CartItem cartItem, BindingResult result, RedirectAttributes redirectAttributes)  {
+    public String updateCheckoutOrder(Model model, @ModelAttribute CartItem cartItem, BindingResult result, RedirectAttributes redirectAttributes)  {
         // Integer orderItemOrderDetailsId = orderItem.getId();
         // if(orderDetailsService.getByOrderDetailsId(orderItem.getId()) == null) {
         //     return "order";
@@ -187,7 +187,7 @@ public class OrderController {
         OrderDetails product = orderDetailsService.getByOrderDetailsId(cartItem.getId());
         product.setQuantity(cartItem.getQuantity());
         if(product.getQuantity() == 0) {
-            orderDetailsService.deleteProductFromOrder(cartItem.getId());
+            orderDetailsService.deleteItemFromOrder(cartItem.getId());
         } else {
             orderDetailsService.save(product);
         }

@@ -36,8 +36,9 @@ hr {
     display: grid; 
     justify-items: start;
 }
-.cart-header-price-container {
-    
+.cart-header {
+    display: grid;
+    justify-items: center;
    
 }
 .cart-header-container {
@@ -105,11 +106,13 @@ hr {
     margin-top: 1rem;
     height: 2.5rem;
     text-decoration: none;
+    box-shadow: 0 3px 0 #c14c00;
 }
 .checkout-btn:hover {
     cursor: pointer;
     color: #fff;
     background: #E34009;
+    transition: box-shadow .1s ease-in-out;
 }
 .subtotal-text {
     margin-bottom: .75rem;

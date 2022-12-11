@@ -1,64 +1,40 @@
 <div th:insert="fragments/header :: header"></div>
-<main>
-  <section th:each="product: ${productDTO}">
-    <div class="image-name-container" id="image-name-container">
-      <div class="name-image-container">
-        <div>
-          <a>
-            <h4 class="product-name" th:text="*{product.name}"></h4>
-          </a>
-        </div>
-        <div>
-          <p id="product-stars" th:text="*{product.stars}" class="product-stars">
-          </p>
-          <p th:text="*{'(' + product.ratingCount + ')'}" class="product-rating"></p>
-        </div>
-        <div>
-          <a href=""> <img th:src="@{*{product.image}}" class="details-img" alt=""></a>
-        </div>
+<main class="prod-details-main-container" th:object="${productDTO}">
+  <section >
+    <div class="prod-detail-image-container">
+      <h6 th:text="${productDTO.name}"></h6>
+      <div>
+        <p th:text="${productDTO.stars}"></p>
+        <p th:text="${productDTO.ratingCount}"></p>
       </div>
-
-
-      <div class="product-details-info-container">
-        <p class="details-price" th:text="'$' + *{#numbers.formatCurrency(product.price)}"></p>
-        <form method="post" th:object="${cartItem}" th:action="@{/order/update}">
-          <div th:each="od: ${orderDetails}">
-            <ul>
-              <li><img th:src="${od.product.image}" alt="" width="180px">
-              </li>
-
-              <input type="hidden" th:name="id" th:value="${od.id}" />
-              </li>
-              <li>Name: <span th:utext="${od.product.name}"></span></li>
-              <li>Price:
-                <span class="price" th:utext="${#numbers.formatCurrency(od.total)}">
-                </span>
-              </li>
-
-              <select th:name="quantity" th:value="${od.quantity}">
-                <!-- <option th:value="${od.quantity}" selected></option> -->
-                <option th:value="${od.quantity}" th:text="${od.quantity}" selected></option>
-                <option th:each="i : ${#numbers.sequence(0, 20)}" th:value="${i}" th:text="${i}">
-                </option>
-
-              </select>
-
-            </ul>
-          </div>
-
-
-          <input type="submit" value="Update Quantity" />
-
-          <a th:href="@{/}">Continue Buy</a>
-
-
-        </form>
-
+      <div>
+        <img th:src="${productDTO.image}" alt="" width="600">
       </div>
-    </div>
-    <div class="product-details-info-container" id="product-details-info-container">
-      <p class="description-text" th:text="*{product.description}"></p>
-    </div>
   </section>
+  <section class="prod-details-add-cart-container" th:object="${orderDetailsDTO}">
+    <div >
+      <h5 th:text="${#numbers.formatCurrency(productDTO.price * orderDetailsDTO.quantity)}"></h5>
+    </div>
+    <div >
+      <form method="post" th:object="${cartItem}" th:action="@{/product/details}">
+        <input type="hidden" th:name="id" th:value="${orderDetailsDTO.id}" />
+      <div class="cart-quantity-container">
+        <select th:name="quantity" th:value="${orderDetailsDTO.quantity}" >
+            <option th:value="${orderDetailsDTO.quantity}" th:text="${orderDetailsDTO.quantity}" selected></option>
+            <option th:each="i : ${#numbers.sequence(0, 20)}" th:value="${i}" th:text="${i}">
+            </option>
+        </select>
+      <input type="submit" value="Add to cart" class="checkout-btn"></a>
+      </form>
+    </div>
+    <!-- <div>
+      <a th:href="@{/order/add(id=${productDTO.id})}" class="checkout-btn">Add to Cart</a>
+      onchange="this.form.submit()"
+    </div> -->
+    <!-- value="Add to Cart" class="checkout-btn" -->
+  </div>
+  </section>
+ 
+  
 </main>
 <div th:insert="fragments/footer :: footer"></div>

@@ -1,4 +1,4 @@
-package com.devduffy.gnomedepot.form;
+package com.devduffy.gnomedepot.dto;
 
 import lombok.Getter;
 import lombok.Setter;

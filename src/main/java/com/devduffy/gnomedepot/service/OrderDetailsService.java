@@ -15,6 +15,6 @@ public interface OrderDetailsService {
     List<OrderDetails> getByOrder(Order order);
     OrderDetails getByOrderAndProduct(Integer orderId, Integer productId);
     // OrderDetails getById(Integer id);
-    void deleteProductFromOrder(Integer id);
+    void deleteItemFromOrder(Integer orderDetailsId);
     OrderDetails getByOrderDetailsId(Integer id);
 }
