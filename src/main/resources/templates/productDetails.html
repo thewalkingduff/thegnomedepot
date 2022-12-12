@@ -3,9 +3,9 @@
   <section >
     <div class="prod-detail-image-container">
       <h6 th:text="${productDTO.name}"></h6>
-      <div>
-        <p th:text="${productDTO.stars}"></p>
-        <p th:text="${productDTO.ratingCount}"></p>
+      <div style="margin-bottom: 1rem;">
+        <p th:text="${productDTO.stars}" id="product-stars" style="display: inline;"></p><span th:text="${' (' + productDTO.ratingCount + ')'}" ></span>
+      
       </div>
       <div>
         <img th:src="${productDTO.image}" alt="" width="600">

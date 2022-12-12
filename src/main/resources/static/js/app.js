@@ -16,5 +16,5 @@ function starGenerator(num) {
     return star;
 }
 
-stars.innerHTML = starGenerator(Number(stars.innerText))
+stars.innerHTML = starGenerator(Number(stars.innerText));
 

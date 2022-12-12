@@ -207,6 +207,12 @@ public class OrderController {
             order.setTotalAmount(
                     order.getTotalAmount() + Constants.FLAT_SHIPPING_COST + (order.getTotalAmount() * 0.06));
             orderService.saveOrder(order);
+            List<OrderDetails> orderDetailsItem = orderDetailsService.getByOrder(order);
+            for (OrderDetails item : orderDetailsItem) {
+                Product product = productService.getProduct(item.getProduct().getId());
+                product.setQuantityInStock(product.getQuantityInStock() - item.getQuantity());
+                productService.saveProduct(product);
+            }
         } else {
             return "checkout";
         }
