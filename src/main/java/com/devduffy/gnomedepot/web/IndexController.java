@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.devduffy.gnomedepot.dto.ProductQuantityDTO;
 import com.devduffy.gnomedepot.entity.Product;
 import com.devduffy.gnomedepot.security.AuthenticatedUserService;
 import com.devduffy.gnomedepot.service.ProductService;
@@ -43,13 +44,13 @@ public class IndexController {
 		} else {
 			log.debug("USER NOT LOGGED IN");
 		}
-
+        model.addAttribute("productQuantityDTO", new ProductQuantityDTO());
         return "home";
     }
 
     @GetMapping("fileUpload")
     public String uploadFile() {
-        return "fileUpload";
+        return "admin/fileUpload";
     }
 
     @PostMapping("/fileUploadSubmit")
@@ -63,6 +64,6 @@ public class IndexController {
 	   
 	    model.addAttribute("filename", "/resources/static/img/" + file.getOriginalFilename());
 
-        return "fileUpload";
+        return "admin/fileUpload";
     }
 }

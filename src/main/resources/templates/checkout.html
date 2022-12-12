@@ -6,7 +6,7 @@
     </a>
   </div>
   <div th:object="${totalProductsInCart}">
-    <h1 style="text-align: center;" class="checkout-header">Checkout (<span class="teal-text"
+    <h1 style="text-align: center;" class="checkout-nav-header">Checkout (<span class="teal-text"
         th:text="${totalProductsInCart + ' Items' }"></span>)</h1>
   </div>
   <div class="lock-icon-div">
@@ -19,12 +19,13 @@
       <div class="cart-header">
         <div class="shipping-container" th:object="${user}">
           <div class="shipping-container-div">
-            <h5 class="checkout-header">1 Shipping Address</h5>
+            <h5 class="checkout-header">Shipping Address</h5>
           </div>
           <div class="user-address-container">
             <p class="user-shipping-text" th:text="${user.firstName} + ' ' + ${user.lastName}"></p>
             <p class="user-shipping-text" th:text="${user.address1}"></p>
             <p class="user-shipping-text" th:text="${user.city} + ', ' + ${user.state} + ' ' + ${user.postalCode}"></p>
+            <p class="teal-text" style="margin-left: 0;">Add delivery instructions</p>
           </div>
 
         </div>
@@ -52,25 +53,33 @@
                 <span th:utext="${od.product.name}"></span>
               </a>
             </div>
-            <div class="price-column-container">
-              <span class="checkout-price-text" th:utext="${#numbers.formatCurrency(od.total * od.quantity)}">
+            <div class="checkout-price-container">
+              <span class="checkout-price-text" th:utext="${#numbers.formatCurrency(od.total)}">
               </span>
             </div>
            
-            <div class="cart-quantity-container">
+            <div class="checkout-quantity-container">
               <select th:name="quantity" th:value="${od.quantity}" onchange="this.form.submit()">
-                <option th:value="${od.quantity}" th:text="${od.quantity}" selected></option>
+                <option th:value="${od.quantity}" th:text="${'Qty: ' + od.quantity}" selected></option>
                 <option th:each="i : ${#numbers.sequence(0, 20)}" th:value="${i}" th:text="${i}">
                 </option>
               </select>
            
-              <div>
+              <!-- <div>
                 <i class="icon-text-separator" role="img" aria-label="|"></i>
                 <a th:href="@{/order/delete(id=${od.id})}" class="teal-text">
                   Delete
                 </a>
-              </div>
+              </div> -->
             </div>
+          </div>
+          <div class="choose-delivery-container">
+            <div>
+              <p style="margin: 0;">Choose a delivery option</p>
+              <input type="radio"  name="fav_language" value="" checked>
+                <label for="html" class="green-text-checkout" >Monday, Dec. 19 - Tuesday, Dec. 20</label><br>
+            </div>
+            
           </div>
         </div>
       </form>
@@ -128,7 +137,7 @@
         <hr class="checkout-hr-bottom">
         <div>
           <h6 class="subtotal-text">Order Total:
-            <span th:if="${totalProductsInCart > 0}" th:text="${#numbers.formatCurrency(orderTotal + 3.99 + orderTotal * 0.06)}"
+            <span th:if="${totalProductsInCart > 0}" th:text="${#numbers.formatCurrency(orderTotal + 3.99 + (orderTotal * 0.06))}"
               class="subtotal-text subtotal-span">
             </span>
             <span th:unless="${totalProductsInCart > 0}" th:text="${#numbers.formatCurrency(0)}"
@@ -146,8 +155,17 @@
     </div>
 
   </section>
+  <p class="checkout-fine-print">
 
+*Why has sales tax been applied? <span class="teal-text-fine">See tax and seller information.</span> <br><br>
+Need help? Check our <span class="teal-text-fine">Help pages</span>  or <span class="teal-text-fine">contact us</span><br><br>
+For an item sold by GnomeDepot.com: When you click the "Place your order" button, we'll send you an email message acknowledging receipt of your order. Your contract to purchase an item will not be complete until we send you an email notifying you that the item has been shipped.<br><br>
+<span class="teal-text-fine">Important information about sales tax you may owe in your state</span><br><br>
+You may return new, unopened merchandise in original condition within 30 days of delivery. Exceptions and restrictions apply. See GnomeDepot.com's <span class="teal-text-fine">Returns Policy.</span><br><br>
+Need to add more items to your order? Continue shopping on the <span class="teal-text-fine">GnomeDepot.com homepage.</span>
+  </p>
 </main>
 
 
-<div th:insert="fragments/footer :: footer"></div>
+</body>
+</html>

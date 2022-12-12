@@ -86,7 +86,7 @@ public class UserController {
         ur.setRoleName("USER");
         ur.setUserId(user.getId());
         userRoleRepository.save(ur);
-        return "success"; 
+        return "success-register"; 
     }
 
     @GetMapping("/user/{id}")
@@ -107,7 +107,7 @@ public class UserController {
 
     @GetMapping("/user/admin")
     public String getAdmin() {
-        return "admin";
+        return "admin/admin";
     }
 
 }

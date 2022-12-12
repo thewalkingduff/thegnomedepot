@@ -1,48 +1,14 @@
 <div th:insert="fragments/header :: header"></div>
-<div class="dropdown">
-  <label for="categories"></label>
-  <select name="categories" id="categories" onchange="loadCategoryProducts(this)">
-    <option value="">Select a Department</option>
-    <option value="garden">Lawn and Garden</option>
-    <option value="indoor">Indoor Plush</option>
-    <option value="clothing">Clothing</option>
-    <option value="books">Books</option>
-  </select>
-</div>
-<main>
+<main class="home-main-container">
   <section>
     <div class="products-container" id="products-container">
 
       <div class="product-card" th:each="product: ${products}">
         <div class="product-img-home-container">
-          <a width="300px" height="500px" th:href="@{/product/details(id = ${product.id})}">
-          <!-- <a width="300px" height="500px" th:href="@{/product/details}"> -->
-            <img th:src="@{*{product.image}}" alt="" width="180px">
+          <a  th:href="@{/product/details(id = ${product.id})}">
+            <img th:src="@{*{product.image}}" alt="" class="home-image">
           </a>
-        </div>
-        
-        <div class="product-card-details">
-          <a class="product-name" th:href="@{/product/details(id = ${product.id})}">
-          <!-- <a class="product-name" th:href="@{/product/details}"> -->
-            <h4 class="product-name-text" th:text="*{product.name}">
-            </h4>
-          </a>
-          <p class="product-stars" th:text="*{product.stars} + ' ' + *{product.ratingCount}">
-
-          </p>
-       
-          <p class="margin" th:text="*{#numbers.formatCurrency(product.price)}">
-          </p>
-          <div class="add-btn-container-home">
-            <a 
-            th:href="@{/order/add(id=${product.id})}"
-            class="add-cart-button"
-            >
-            Add to Cart
-        </a>
-          </div>
-         
-        </div>
+        </div>        
       </div>
     </div>
   </section>

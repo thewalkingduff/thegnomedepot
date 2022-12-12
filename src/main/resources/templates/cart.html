@@ -6,7 +6,7 @@
                 <div>
                     <h1 th:if="${totalProductsInCart > 0} " class="cart-header-text">Shopping Cart </h1>
                     <h1 th:unless="${totalProductsInCart > 0}" class="cart-header-text">Your Gnome Depot Cart is empty.</h1>
-                    <img th:unless="${totalProductsInCart > 0}" src="https://st3.depositphotos.com/5792148/13370/v/1600/depositphotos_133708566-stock-illustration-cartoon-sad-gnome.jpg" alt="" width="400px">
+                    <img th:unless="${totalProductsInCart > 0}" src="https://st3.depositphotos.com/5792148/13370/v/1600/depositphotos_133708566-stock-illustration-cartoon-sad-gnome.jpg" alt="" width="350px">
                 </div>
 
             </div>
@@ -30,11 +30,11 @@
                             <span th:utext="${od.product.name}"></span>
                         </a>
                     </div>
-                    <p class="in-stock-text">In Stock</p>
+                    <p class="green-text-cart">In Stock</p>
                     <div class="cart-quantity-container">
                         <select th:name="quantity" th:value="${od.quantity}" onchange="this.form.submit()">
-                            <option th:value="${od.quantity}" th:text="${od.quantity}" selected></option>
-                            <option th:each="i : ${#numbers.sequence(0, 20)}" th:value="${i}" th:text="${i}">
+                            <option th:value="${od.quantity}" th:text="${'Qty: ' + od.quantity}" selected></option>
+                            <option th:each="i : ${#numbers.sequence(1, 20)}" th:value="${i}" th:text="${i}">
                             </option>
                         </select>
                         <div>
@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 <div class="price-column-container">
-                    <span class="subtotal-price-text" th:utext="${#numbers.formatCurrency(od.total * od.quantity)}">
+                    <span class="subtotal-price-text" th:utext="${#numbers.formatCurrency(od.total)}">
                     </span>
                 </div>
             </div>

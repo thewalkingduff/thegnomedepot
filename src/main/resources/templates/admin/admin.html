@@ -1,30 +1,26 @@
 
-<div th:replace="fragments/header :: header"/>
+<div th:insert="fragments/header :: header"></div>
 
-<div class="container">
+<div class="container" >
  
     <div class="starter-template">
-        <h1>Admin page (Spring Security protected)</h1>
+        <h1 class="admin-main-header">Admin page <br>(Spring Security protected)</h1>
 
-        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-        <ul>
+        <h2 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h2>
+        <ul class="admin-ul">
             <li>
-                <a class="light-black-text" th:href="@{/product/create}">Create Product</a>
+                <a class="admin-list-item teal-text" th:href="@{/product/create}">Create Product</a>
             </li>
             <li>
                 <a ></a>
             </li>
         </ul>
-        <form th:action="@{/user/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
+        <form th:action="@{/user/logout}" method="post" class="admin-form">
+            <input type="submit" value="Sign Out" class="admin-sign-out-btn"/>
         </form>
 
     </div>
 
-</div>
-<!-- /.container -->
-
-<div th:replace="fragments/footer :: footer"/>
-
-</body>
-</html>
+    <!-- <div th:insert="fragments/footer :: footer"></div> -->
+    </body>
+    </html>

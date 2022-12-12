@@ -6,6 +6,7 @@ hr {
     display: grid;
     grid-template-columns: 70% 30%;
     align-items: start;
+    margin-bottom: 7rem;
 }
 
 .cart-image-details-container {
@@ -13,7 +14,7 @@ hr {
     justify-items: center;
     align-items: center; */
     background: #fff;
-    margin: 1rem;
+    margin: 0 1rem;
     padding: 1rem 0;
 }
 /* .checkout-button-subtotal-container {
@@ -26,7 +27,7 @@ hr {
 } */
 .checkout-button-subtotal-container {
     background: #fff;
-    margin: 1rem;
+    margin: 0 1rem;
     padding: 2rem 1rem;
     display: grid;
     justify-items: center;
@@ -134,7 +135,7 @@ hr {
     height: 14px;
     vertical-align: middle;
 }
-.in-stock-text {
+.green-text-cart {
     color: #007600;
     font-size: 12px;
     margin: 0;

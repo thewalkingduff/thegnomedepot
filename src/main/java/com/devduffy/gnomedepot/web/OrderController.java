@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.devduffy.gnomedepot.Constants;
 import com.devduffy.gnomedepot.dto.CartItem;
+import com.devduffy.gnomedepot.dto.ProductQuantityDTO;
 import com.devduffy.gnomedepot.entity.Order;
 import com.devduffy.gnomedepot.entity.OrderDetails;
 import com.devduffy.gnomedepot.entity.Product;
@@ -43,9 +44,10 @@ public class OrderController {
     AuthenticatedUserService authenticatedUserService;
     Integer totalProductsInCart = 0;
     Double orderTotal = 0.0;
-    
-    public OrderController(OrderService orderService, ProductService productService, UserService userService, AuthenticatedUserService authenticatedUserService,
-    OrderDetailsService orderDetailsService) {
+
+    public OrderController(OrderService orderService, ProductService productService, UserService userService,
+            AuthenticatedUserService authenticatedUserService,
+            OrderDetailsService orderDetailsService) {
         this.orderService = orderService;
         this.productService = productService;
         this.userService = userService;
@@ -57,11 +59,11 @@ public class OrderController {
     public String getCurrentOrder(Model model) {
         User user = authenticatedUserService.getCurrentUser();
         Order order = orderService.getCurrentOrderOrNewOrder(user);
-        
+
         totalProductsInCart = 0;
         orderTotal = 0.0;
 
-        if(order.getId() == null) {
+        if (order.getId() == null) {
             order.setOrderDate(new Date());
             order.setStatus("pending");
             order.setUser(user);
@@ -69,18 +71,16 @@ public class OrderController {
             orderService.saveOrder(order);
         }
 
-        if(!(orderDetailsService.getByOrder(order).isEmpty())) {
+        if (!(orderDetailsService.getByOrder(order).isEmpty())) {
             for (OrderDetails orderDetail : orderDetailsService.getByOrder(order)) {
-                // if(orderDetail.getOrder().getId() == order.getId()) {
-                    totalProductsInCart += orderDetail.getQuantity();
-                    orderTotal += orderDetail.getTotal() * orderDetail.getQuantity();
-                // }
+                totalProductsInCart += orderDetail.getQuantity();
+                orderTotal += orderDetail.getTotal();
             }
         }
 
         order.setTotalAmount(orderTotal);
         orderService.saveOrder(order);
-        
+
         model.addAttribute("orderDetails", orderDetailsService.getByOrder(order));
         model.addAttribute("order", order);
         model.addAttribute("totalProductsInCart", totalProductsInCart);
@@ -89,114 +89,92 @@ public class OrderController {
         return "cart";
     }
 
-    @GetMapping("/order/add")
-    public String addToorder(Model model, @RequestParam("id") Integer id) {
+    @PostMapping("/order/add")
+    public String addToOrder(Model model, @ModelAttribute ProductQuantityDTO productQuantityDTO, BindingResult result) {
         User user = authenticatedUserService.getCurrentUser();
-        Product product = productService.getProduct(id);
-        Order order = new Order();
+        Product product = productService.getProduct(productQuantityDTO.getId());
+        Order order = orderService.getCurrentOrderOrNewOrder(user);
         OrderDetails orderDetails = new OrderDetails();
-        List<Order> allUserOrders = orderService.getListOrderOfUser(user);
-        for (Order o : allUserOrders) {
-            String orderStatus = o.getStatus();
-            if( orderStatus.equals("pending")) {
-                order = o;
-                order.setOrderDate(new Date());
-                
-               // this is checking if product is in order. if it is, add 1 to quantity
-                if(orderDetailsService.getByOrderAndProduct(order.getId(), id) != null) {
-                    orderDetails = orderDetailsService.getByOrderAndProduct(order.getId(), id);
-                    orderDetails.setQuantity(orderDetails.getQuantity());
-                    orderDetails.setTotal(0.0);
-                    orderDetails.setTotal(orderDetails.getTotal() + product.getPrice());
-                    orderDetailsService.save(orderDetails);
-                // else, add product to order and set quantity to 1 
-                } else {
-                    orderDetails.setOrder(order);
-                    orderDetails.setProduct(product);
-                    orderDetails.setQuantity(1); 
-                    orderDetails.setTotal(product.getPrice());
-                    orderDetailsService.save(orderDetails);
-                }   
-            } 
+
+        if (orderDetailsService.getByOrderAndProduct(order.getId(), productQuantityDTO.getId()) != null) {
+            orderDetails = orderDetailsService.getByOrderAndProduct(order.getId(), productQuantityDTO.getId());
         }
 
-        if(order.getId() == null) {
+        if (order.getId() == null) {
             order.setOrderDate(new Date());
             order.setStatus("pending");
             order.setUser(user);
             order.setTotalAmount(orderTotal);
             orderService.saveOrder(order);
-            orderDetails = new OrderDetails(); 
+            orderDetails = new OrderDetails();
             orderDetails.setOrder(order);
             orderDetails.setProduct(product);
-            orderDetails.setQuantity(1); 
-            orderDetails.setTotal(product.getPrice());
-            orderDetailsService.save(orderDetails);
+            orderDetails.setQuantity(productQuantityDTO.getQuantity());
+            orderDetails.setTotal(product.getPrice() * productQuantityDTO.getQuantity());
+        } else if (orderDetails.getId() == null) {
+            orderDetails = new OrderDetails();
+            orderDetails.setOrder(order);
+            orderDetails.setProduct(product);
+            orderDetails.setQuantity(productQuantityDTO.getQuantity());
+            orderDetails.setTotal(product.getPrice() * productQuantityDTO.getQuantity());
+        } else {
+            orderDetails.setQuantity(orderDetails.getQuantity() + productQuantityDTO.getQuantity());
+            orderDetails.setTotal(product.getPrice() * orderDetails.getQuantity());
         }
-        
-        for (OrderDetails orderDetail : orderDetailsService.getByOrder(order)) {
-            if(orderDetail.getOrder().getId() == order.getId()) {
-                totalProductsInCart += orderDetail.getQuantity();
-                orderTotal += orderDetail.getTotal();
-            }
-        }
+        orderDetailsService.save(orderDetails);
 
-        order.setTotalAmount(orderTotal);
-
-        model.addAttribute("orderDetails", orderDetailsService.getByOrder(order));
-        model.addAttribute("totalProductsInCart", totalProductsInCart);
-        model.addAttribute("orderTotal", orderTotal);
-           
         return "redirect:/order/current";
     }
 
     @Transactional
     @GetMapping("/order/delete")
     public String removeItemFromorder(Model model, @RequestParam("id") Integer id) {
-        orderDetailsService.deleteItemFromOrder(id);;
+        orderDetailsService.deleteItemFromOrder(id);
+        ;
         return "redirect:/order/current";
     }
-   
-
 
     @Transactional
     @PostMapping("/order/update")
-    public String updateOrder(@ModelAttribute CartItem cartItem, BindingResult result)  {
+    public String updateOrder(@ModelAttribute CartItem cartItem, BindingResult result) {
         // Integer orderItemOrderDetailsId = orderItem.getId();
         // if(orderDetailsService.getByOrderDetailsId(orderItem.getId()) == null) {
-        //     return "order";
+        // return "order";
         // }
         OrderDetails product = orderDetailsService.getByOrderDetailsId(cartItem.getId());
         product.setQuantity(cartItem.getQuantity());
-        if(product.getQuantity() == 0) {
+        product.setTotal(product.getQuantity() * product.getProduct().getPrice());
+        if (product.getQuantity() == 0) {
             orderDetailsService.deleteItemFromOrder(cartItem.getId());
         } else {
             orderDetailsService.save(product);
         }
-     
+
         return "redirect:/order/current";
     }
 
     @Transactional
     @PostMapping("/order/checkout/update")
-    public String updateCheckoutOrder(Model model, @ModelAttribute CartItem cartItem, BindingResult result, RedirectAttributes redirectAttributes)  {
+    public String updateCheckoutOrder(Model model, @ModelAttribute CartItem cartItem, BindingResult result,
+            RedirectAttributes redirectAttributes) {
         // Integer orderItemOrderDetailsId = orderItem.getId();
         // if(orderDetailsService.getByOrderDetailsId(orderItem.getId()) == null) {
-        //     return "order";
+        // return "order";
         // }
         OrderDetails product = orderDetailsService.getByOrderDetailsId(cartItem.getId());
         product.setQuantity(cartItem.getQuantity());
-        if(product.getQuantity() == 0) {
+        if (product.getQuantity() == 0) {
             orderDetailsService.deleteItemFromOrder(cartItem.getId());
         } else {
             orderDetailsService.save(product);
         }
-        redirectAttributes.addAttribute("id", orderService.getCurrentOrderOrNewOrder(authenticatedUserService.getCurrentUser()).getId());
+        redirectAttributes.addAttribute("id",
+                orderService.getCurrentOrderOrNewOrder(authenticatedUserService.getCurrentUser()).getId());
         return "redirect:/order/checkout";
     }
 
     @GetMapping("/order/checkout")
-    public String checkoutorder(Model model, @RequestParam("id") Integer id)  {
+    public String checkoutorder(Model model, @RequestParam("id") Integer id) {
         User user = authenticatedUserService.getCurrentUser();
         Order order = orderService.getOrderById(id);
 
@@ -206,9 +184,10 @@ public class OrderController {
         List<OrderDetails> itemsInOrder = orderDetailsService.getByOrder(order);
 
         for (OrderDetails item : itemsInOrder) {
-                totalProductsInCart += item.getQuantity();
-                orderTotal += item.getTotal() * item.getQuantity();
+        totalProductsInCart += item.getQuantity();
+        orderTotal += item.getTotal();
         }
+
         model.addAttribute("totalProductsInCart", totalProductsInCart);
         model.addAttribute("user", user);
         model.addAttribute("orderDetails", orderDetailsService.getByOrder(order));
@@ -220,16 +199,17 @@ public class OrderController {
 
     @Transactional
     @GetMapping("/order/submit")
-    public String updateorder(Model model, @RequestParam("id") Integer id)  {
-        if(totalProductsInCart > 0) {
+    public String updateorder(Model model, @RequestParam("id") Integer id) {
+        if (totalProductsInCart > 0) {
             Order order = orderService.getOrderById(id);
             order.setOrderDate(new Date());
             order.setStatus("complete");
-            order.setTotalAmount(order.getTotalAmount() + Constants.FLAT_SHIPPING_COST + (order.getTotalAmount()*0.06));
+            order.setTotalAmount(
+                    order.getTotalAmount() + Constants.FLAT_SHIPPING_COST + (order.getTotalAmount() * 0.06));
             orderService.saveOrder(order);
         } else {
             return "checkout";
         }
         return "success-order";
-    } 
+    }
 }

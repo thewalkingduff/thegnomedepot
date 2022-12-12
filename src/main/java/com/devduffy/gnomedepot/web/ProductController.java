@@ -23,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.devduffy.gnomedepot.dto.CartItem;
 import com.devduffy.gnomedepot.dto.OrderDetailsDTO;
 import com.devduffy.gnomedepot.dto.ProductDTO;
+import com.devduffy.gnomedepot.dto.ProductQuantityDTO;
 import com.devduffy.gnomedepot.entity.Order;
 import com.devduffy.gnomedepot.entity.OrderDetails;
 import com.devduffy.gnomedepot.entity.Product;
@@ -70,64 +71,67 @@ public class ProductController {
     Product product = productService.getProduct(id);
     ProductDTO productDTO = product.toDTO();
     model.addAttribute("productDTO", productDTO);
+    OrderDetails orderDetails = orderDetailsService.getByOrderAndProduct(orderService.getCurrentOrderOrNewOrder(authenticatedUserService.getCurrentUser()).getId(), id);
+    // Order order = orderService.getCurrentOrderOrNewOrder(authenticatedUserService.getCurrentUser());
+    // OrderDetails orderDetails = new OrderDetails();
+    // OrderDetailsDTO orderDetailsDTO = new OrderDetailsDTO();
+    // if(orderDetailsService.getByOrderAndProduct(order.getId(), id) != null) {
+    //   orderDetails = orderDetailsService.getByOrderAndProduct(order.getId(), id);
+    // }
+    //  else {
+    //   orderDetails.setOrder(order);
+    //   orderDetails.setProduct(product);
+    //   orderDetails.setQuantity(0);
+    //   orderDetails.setTotal(0.0);
+    //   orderDetailsService.save(orderDetails);
+    
+    // }
 
-    Order order = orderService.getCurrentOrderOrNewOrder(authenticatedUserService.getCurrentUser());
-    OrderDetails orderDetails = new OrderDetails();
-    OrderDetailsDTO orderDetailsDTO = new OrderDetailsDTO();
-    if(orderDetailsService.getByOrderAndProduct(order.getId(), id) != null) {
-      orderDetails = orderDetailsService.getByOrderAndProduct(order.getId(), id);
-    }
-     else {
-      orderDetails.setOrder(order);
-      orderDetails.setProduct(product);
-      orderDetails.setQuantity(0);
-      orderDetails.setTotal(0.0);
-      orderDetailsService.save(orderDetails);
-    }
-
-    orderDetailsDTO = orderDetails.toDTO();
-    model.addAttribute("orderDetailsDTO", orderDetailsDTO);
-    model.addAttribute("cartItem", new CartItem());
+    // orderDetailsDTO = orderDetails.toDTO();
+    // model.addAttribute("orderDetailsDTO", orderDetailsDTO);
+   
+   
+    model.addAttribute("productQuantityDTO", new ProductQuantityDTO());
     return "productDetails";
   }
 
-  @Transactional
-    @PostMapping("/product/details")
-    public String updateOrder(@ModelAttribute CartItem cartItem, BindingResult result, RedirectAttributes redirectAttributes)  {
+  // @Transactional
+  //   @PostMapping("/product/details")
+  //   public String updateOrder(@ModelAttribute CartItem cartItem, BindingResult result, RedirectAttributes redirectAttributes)  {
       
-        // Product product = productService.getProduct(cartItem.getId());
-        OrderDetails item = orderDetailsService.getByOrderDetailsId(cartItem.getId());
-        // if(orderDetailsService.getByOrderDetailsId(cartItem.getId()) != null) {
-        //     item = orderDetailsService.getByOrderDetailsId(cartItem.getId());
-        // } else {
-        //   item.setOrder(orderService.getCurrentOrderOrNewOrder(authenticatedUserService.getCurrentUser()));
-        //   item.setProduct(product);
-        //   item.setQuantity(cartItem.getQuantity());
-        //   item.setTotal(product.getPrice() * cartItem.getQuantity());
-        // }
+  //       Product product = productService.getProduct(cartItem.getId());
+  //       // OrderDetails item = orderDetailsService.getByOrderDetailsId(cartItem.getId());
+  //       // if(orderDetailsService.getByOrderDetailsId(cartItem.getId()) != null) {
+  //       //     item = orderDetailsService.getByOrderDetailsId(cartItem.getId());
+  //       // } else {
+  //       //   item.setOrder(orderService.getCurrentOrderOrNewOrder(authenticatedUserService.getCurrentUser()));
+  //       //   item.setProduct(product);
+  //       //   item.setQuantity(cartItem.getQuantity());
+  //       //   item.setTotal(product.getPrice() * cartItem.getQuantity());
+  //       // }
 
-        item.setQuantity(cartItem.getQuantity());
+  //       // item.setQuantity(cartItem.getQuantity());
 
-        if(item.getQuantity() == 0) {
-            orderDetailsService.deleteItemFromOrder(null);
-        } else {
-            orderDetailsService.save(item);
-        }
-        redirectAttributes.addAttribute("id", item.getProduct().getId());
-        return "redirect:/order/current";
-    }
+  //       // if(item.getQuantity() == 0) {
+  //       //     orderDetailsService.deleteItemFromOrder(null);
+  //       // } else {
+  //       //     orderDetailsService.save(item);
+  //       // }
+  //       redirectAttributes.addAttribute("id", item.getProduct().getId());
+  //       return "redirect:/order/current";
+  //   }
 
   @GetMapping("/product/create")
   public String productForm(Model model) {
     model.addAttribute("product", new Product());
-    return "createProduct";
+    return "admin/createProduct";
   }
 
   @PostMapping("/product/create")
   public String productSubmit(@ModelAttribute Product product, Model model) {
     model.addAttribute("product", product);
     productService.saveProduct(product);
-    return "result";
+    return "admin/result";
   }
 
   @GetMapping("/product/search")
