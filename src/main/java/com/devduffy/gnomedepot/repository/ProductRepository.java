@@ -20,17 +20,12 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 	// public List<Product> findByNameContainingIgnoreCaseOrderByNameDesc(String name);
 	
 
-	// @Query("SELECT p FROM Product p where p.name like :name OR p.category like :category")
-	// public List<Product> findByNameOrCategory(String name, String category);
+	@Query("SELECT p FROM Product p where p.category like :category")
+	public List<Product> findByCategory(String category);
 
 	Optional<Product> findById(Integer id);
 	List<Product> findAll();
-	
-	// @Query(value = "select * from products p where p.name = :word", nativeQuery = true)
-	// @Query("select p from products p where p.name like %:word%")
-	// List<Product> findByKeyword(String word);
-
 	List<Product> findByNameIgnoreCaseContaining(String name);
-	List<Product> productSearchResults = new ArrayList<Product>();
+	
 	
 }

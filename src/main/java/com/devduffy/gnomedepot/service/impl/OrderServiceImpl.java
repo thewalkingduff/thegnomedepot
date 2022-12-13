@@ -28,8 +28,10 @@ public class OrderServiceImpl implements OrderService {
     
     @Autowired
     OrderRepository orderRepository;
+
     @Autowired
     ProductRepository productRepository;
+
     @Autowired
     UserRepository userRepository;
 
@@ -42,6 +44,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> getAllOrders() {
+        System.out.println("orderRepo: " + orderRepository.findAll());
         return orderRepository.findAll();
     }
 
@@ -78,11 +81,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order getOrderById(Integer id) {
-       
         return orderRepository.findByOrderId(id);
     }
-
-    
 
     @Override
     public Order getCurrentOrderOrNewOrder(User user) {
@@ -95,6 +95,19 @@ public class OrderServiceImpl implements OrderService {
         } 
         return new Order();
     }
+
+    @Override
+    public void setFieldsIfNewOrder(Order order, User user) {
+        if (order.getId() == null) {
+            order.setOrderDate(new Date());
+            order.setStatus("pending");
+            order.setUser(user);
+            order.setTotalAmount(Constants.ZERO_DOUBLE);
+            orderRepository.save(order);
+        }
+    }
+
+    
 
     
 

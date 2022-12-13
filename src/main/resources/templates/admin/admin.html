@@ -1,8 +1,7 @@
-
 <div th:insert="fragments/header :: header"></div>
 
-<div class="container" >
- 
+<div class="container">
+
     <div class="starter-template">
         <h1 class="admin-main-header">Admin page <br>(Spring Security protected)</h1>
 
@@ -12,15 +11,14 @@
                 <a class="admin-list-item teal-text" th:href="@{/product/create}">Create Product</a>
             </li>
             <li>
-                <a ></a>
+                <a></a>
             </li>
         </ul>
         <form th:action="@{/user/logout}" method="post" class="admin-form">
-            <input type="submit" value="Sign Out" class="admin-sign-out-btn"/>
+            <input type="submit" value="Sign Out" class="admin-sign-out-btn" />
         </form>
 
     </div>
-
-    <!-- <div th:insert="fragments/footer :: footer"></div> -->
     </body>
+
     </html>

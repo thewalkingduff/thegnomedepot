@@ -18,6 +18,7 @@ public interface OrderService {
     Order getOrderByUser(User user);
     void saveOrder(Order order);
     Order getCurrentOrderOrNewOrder(User user);
+    void setFieldsIfNewOrder(Order order, User user);
    
    
 }

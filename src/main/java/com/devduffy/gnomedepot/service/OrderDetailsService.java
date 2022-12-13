@@ -1,11 +1,13 @@
 package com.devduffy.gnomedepot.service;
 
 import java.util.List;
-import java.util.Optional;
 
+
+import com.devduffy.gnomedepot.dto.ProductQuantityDTO;
 import com.devduffy.gnomedepot.entity.Order;
 import com.devduffy.gnomedepot.entity.OrderDetails;
 import com.devduffy.gnomedepot.entity.User;
+import com.devduffy.gnomedepot.entity.Product;
 
 public interface OrderDetailsService {
     void submitOrderDetails(Order order, User user);
@@ -17,4 +19,5 @@ public interface OrderDetailsService {
     // OrderDetails getById(Integer id);
     void deleteItemFromOrder(Integer orderDetailsId);
     OrderDetails getByOrderDetailsId(Integer id);
+    OrderDetails createOrderDetails(ProductQuantityDTO productQuantityDTO);
 }

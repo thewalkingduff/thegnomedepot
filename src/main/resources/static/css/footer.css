@@ -1,11 +1,29 @@
-.footer {
+.footer-container {
     background-color: #F96302;
-    padding: .5rem;
+    padding: 2rem 4rem 0;
     text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    justify-items: center;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 2rem;
   }
+.footer-div-container {
+   
+padding-right: 3rem;
+   
+  }
+.footer-container div ul {
+ 
+    list-style: none;
+    text-align: left;
+}
+.footer-container div ul {
+    list-style: none;
+}
+.footer-container div ul li{
+  font-size: 14px;
+  color: #dddddd;
+}
  
   
   a.menu:hover {
@@ -39,3 +57,11 @@
     color: yellow;
     
   }
+  .footer-header {
+    font-size: 16px;
+    color: white;
+  }
+  .footer-logo-container {
+    padding: 0;
+  }
+ 

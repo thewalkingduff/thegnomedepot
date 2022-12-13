@@ -1,19 +1,17 @@
 package com.devduffy.gnomedepot.web;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -25,13 +23,13 @@ import com.devduffy.gnomedepot.entity.OrderDetails;
 import com.devduffy.gnomedepot.entity.Product;
 import com.devduffy.gnomedepot.entity.User;
 import com.devduffy.gnomedepot.security.AuthenticatedUserService;
-import com.devduffy.gnomedepot.security.UserDetailsServiceImpl;
 import com.devduffy.gnomedepot.service.OrderDetailsService;
 import com.devduffy.gnomedepot.service.OrderService;
 import com.devduffy.gnomedepot.service.ProductService;
 import com.devduffy.gnomedepot.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
+
 
 @Slf4j
 @Controller
@@ -45,9 +43,7 @@ public class OrderController {
     Integer totalProductsInCart = 0;
     Double orderTotal = 0.0;
 
-    public OrderController(OrderService orderService, ProductService productService, UserService userService,
-            AuthenticatedUserService authenticatedUserService,
-            OrderDetailsService orderDetailsService) {
+    public OrderController(OrderService orderService, ProductService productService, UserService userService, AuthenticatedUserService authenticatedUserService, OrderDetailsService orderDetailsService) {
         this.orderService = orderService;
         this.productService = productService;
         this.userService = userService;
@@ -62,15 +58,9 @@ public class OrderController {
 
         totalProductsInCart = 0;
         orderTotal = 0.0;
-
-        if (order.getId() == null) {
-            order.setOrderDate(new Date());
-            order.setStatus("pending");
-            order.setUser(user);
-            order.setTotalAmount(orderTotal);
-            orderService.saveOrder(order);
-        }
-
+        System.out.println("categories: " + productService.getByCategory("Christmas"));
+        orderService.setFieldsIfNewOrder(order, user);
+        System.out.println(orderService.getOrderById(27));
         if (!(orderDetailsService.getByOrder(order).isEmpty())) {
             for (OrderDetails orderDetail : orderDetailsService.getByOrder(order)) {
                 totalProductsInCart += orderDetail.getQuantity();
@@ -101,22 +91,10 @@ public class OrderController {
         }
 
         if (order.getId() == null) {
-            order.setOrderDate(new Date());
-            order.setStatus("pending");
-            order.setUser(user);
-            order.setTotalAmount(orderTotal);
-            orderService.saveOrder(order);
-            orderDetails = new OrderDetails();
-            orderDetails.setOrder(order);
-            orderDetails.setProduct(product);
-            orderDetails.setQuantity(productQuantityDTO.getQuantity());
-            orderDetails.setTotal(product.getPrice() * productQuantityDTO.getQuantity());
+            orderService.setFieldsIfNewOrder(order, user);
+            orderDetails = orderDetailsService.createOrderDetails(productQuantityDTO);
         } else if (orderDetails.getId() == null) {
-            orderDetails = new OrderDetails();
-            orderDetails.setOrder(order);
-            orderDetails.setProduct(product);
-            orderDetails.setQuantity(productQuantityDTO.getQuantity());
-            orderDetails.setTotal(product.getPrice() * productQuantityDTO.getQuantity());
+            orderDetails = orderDetailsService.createOrderDetails(productQuantityDTO);
         } else {
             orderDetails.setQuantity(orderDetails.getQuantity() + productQuantityDTO.getQuantity());
             orderDetails.setTotal(product.getPrice() * orderDetails.getQuantity());
@@ -137,10 +115,6 @@ public class OrderController {
     @Transactional
     @PostMapping("/order/update")
     public String updateOrder(@ModelAttribute CartItem cartItem, BindingResult result) {
-        // Integer orderItemOrderDetailsId = orderItem.getId();
-        // if(orderDetailsService.getByOrderDetailsId(orderItem.getId()) == null) {
-        // return "order";
-        // }
         OrderDetails product = orderDetailsService.getByOrderDetailsId(cartItem.getId());
         product.setQuantity(cartItem.getQuantity());
         product.setTotal(product.getQuantity() * product.getProduct().getPrice());
@@ -149,20 +123,15 @@ public class OrderController {
         } else {
             orderDetailsService.save(product);
         }
-
         return "redirect:/order/current";
     }
 
     @Transactional
     @PostMapping("/order/checkout/update")
-    public String updateCheckoutOrder(Model model, @ModelAttribute CartItem cartItem, BindingResult result,
-            RedirectAttributes redirectAttributes) {
-        // Integer orderItemOrderDetailsId = orderItem.getId();
-        // if(orderDetailsService.getByOrderDetailsId(orderItem.getId()) == null) {
-        // return "order";
-        // }
+    public String updateCheckoutOrder(Model model, @ModelAttribute CartItem cartItem, BindingResult result, RedirectAttributes redirectAttributes) {
         OrderDetails product = orderDetailsService.getByOrderDetailsId(cartItem.getId());
         product.setQuantity(cartItem.getQuantity());
+        product.setTotal(product.getProduct().getPrice() * cartItem.getQuantity());
         if (product.getQuantity() == 0) {
             orderDetailsService.deleteItemFromOrder(cartItem.getId());
         } else {
@@ -182,11 +151,15 @@ public class OrderController {
         orderTotal = 0.0;
 
         List<OrderDetails> itemsInOrder = orderDetailsService.getByOrder(order);
-
         for (OrderDetails item : itemsInOrder) {
         totalProductsInCart += item.getQuantity();
         orderTotal += item.getTotal();
         }
+
+  
+        
+        order.setTotalAmount(orderTotal);
+        orderService.saveOrder(order);
 
         model.addAttribute("totalProductsInCart", totalProductsInCart);
         model.addAttribute("user", user);
@@ -204,15 +177,14 @@ public class OrderController {
             Order order = orderService.getOrderById(id);
             order.setOrderDate(new Date());
             order.setStatus("complete");
-            order.setTotalAmount(
-                    order.getTotalAmount() + Constants.FLAT_SHIPPING_COST + (order.getTotalAmount() * 0.06));
+            DecimalFormat df = new DecimalFormat("#.##");
+            Double roundTotal = Double.valueOf(df.format(order.getTotalAmount() + Constants.FLAT_SHIPPING_COST + (order.getTotalAmount() * Constants.TAX_RATE))) ;
+            order.setTotalAmount(roundTotal);
             orderService.saveOrder(order);
+        
             List<OrderDetails> orderDetailsItem = orderDetailsService.getByOrder(order);
-            for (OrderDetails item : orderDetailsItem) {
-                Product product = productService.getProduct(item.getProduct().getId());
-                product.setQuantityInStock(product.getQuantityInStock() - item.getQuantity());
-                productService.saveProduct(product);
-            }
+            System.out.println(orderDetailsItem);
+            productService.updateProductQuantityInStock(orderDetailsItem);
         } else {
             return "checkout";
         }

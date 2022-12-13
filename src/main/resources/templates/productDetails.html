@@ -24,6 +24,7 @@
             <option th:each="i : ${#numbers.sequence(0, 20)}" th:value="${i}" th:text="${i}" selected="selected">
             </option>
         </select> -->
+        <p th:if="${productDTO.quantityInStock < 10}" th:text="${'Only ' + productDTO.quantityInStock + ' left in stock - order soon.'}" class="red-low-stock-text"></p>
         <select th:name="quantity" th:value="${quantity}" class="quantity-dropdown">
           <option th:value="${1}" th:text="${'Qty: ' + 1}" selected></option>
           </option>

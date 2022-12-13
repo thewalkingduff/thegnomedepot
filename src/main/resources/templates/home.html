@@ -1,9 +1,9 @@
 <div th:insert="fragments/header :: header"></div>
-<main class="home-main-container">
+<main class="home-main-container" >
   <section>
-    <div class="products-container" id="products-container">
+    <div class="products-container" id="products-container" style="padding-bottom: 10rem;">
 
-      <div class="product-card" th:each="product: ${products}">
+      <div class="product-card" th:each="product: ${products}" >
         <div class="product-img-home-container">
           <a  th:href="@{/product/details(id = ${product.id})}">
             <img th:src="@{*{product.image}}" alt="" class="home-image">

@@ -3,8 +3,10 @@ package com.devduffy.gnomedepot.service.impl;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.devduffy.gnomedepot.entity.OrderDetails;
 import com.devduffy.gnomedepot.entity.Product;
 import com.devduffy.gnomedepot.exception.ProductNotFoundException;
 import com.devduffy.gnomedepot.repository.ProductRepository;
@@ -15,6 +17,8 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Service
 public class ProductServiceImpl implements ProductService{
+
+    @Autowired
     ProductRepository productRepository;
 
     @Override
@@ -43,6 +47,22 @@ public class ProductServiceImpl implements ProductService{
         List<Product> products = productRepository.findByNameIgnoreCaseContaining(name);
         return products;
     }
+
+    @Override
+    public void updateProductQuantityInStock(List<OrderDetails> orderDetailsItem) {
+        for (OrderDetails item : orderDetailsItem) {
+            Product product = getProduct(item.getProduct().getId());
+            product.setQuantityInStock(product.getQuantityInStock() - item.getQuantity());
+            productRepository.save(product);
+        }    
+    }
+
+    @Override
+    public List<Product> getByCategory(String category) {
+        return productRepository.findByCategory(category);
+    }
+
+   
 
     // @Override
     // public List<Product> getByName(String name) {

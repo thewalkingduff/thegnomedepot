@@ -11,8 +11,6 @@ import com.devduffy.gnomedepot.service.ProductService;
 @SpringBootApplication()
 public class GnomedepotApplication {
 
-	// @Autowired
-    // ProductService productService;
 	public static void main(String[] args) {
 
 		SpringApplication.run(GnomedepotApplication.class, args);

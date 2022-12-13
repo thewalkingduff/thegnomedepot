@@ -1,46 +1,38 @@
 <div th:insert="fragments/header :: header"></div>
 
-
-<main class="main-container">
-
-    <h1 class="login-header">Create a Product</h1>
-    <form method="post" th:object="${product}" th:action="@{/product/create}">
-      <div class="input-container">
-        <p class="error-message" th:errors="*{name}"></p>
-        <input type="text" placeholder="Name" th:field="*{name}">
-        <p class="error-message" th:errors="*{category}"></p>
-        <input type="text" placeholder="Category" th:field="*{category}">
-      </div>
-      <div class="input-container">
-        <p class="error-message" th:errors="*{image}"></p>
-        <input type="text" placeholder="Image" th:field="*{image}">
-        <p class="error-message" th:errors="*{description}"></p>
-        <input type="text" placeholder="Description" th:field="*{description}">
-        
-      </div>
-      <div class="input-container">
-        <p class="error-message" th:errors="*{stars}"></p>
-        <input type="text" placeholder="Stars" th:field="*{stars}">
-        <p class="error-message" th:errors="*{quantityInStock}"></p>
-        <input type="text" placeholder="Quantity In Stock" th:field="*{quantityInStock}">        
-      </div>   
-      <div class="input-container">
-        <p class="error-message" th:errors="*{ratingCount}"></p>
-        <input type="text" placeholder="Rating Count" th:field="*{ratingCount}">
-        <p class="error-message" th:errors="*{price}"></p>
-        <input type="text" placeholder="Price" th:field="*{price}">
-      </div>
-      
-     
-      <div style="display:block; text-align:center;">
-        <input  type="submit" value="Submit" class="login-form-submit">
+<main class="main-container" style="margin-bottom: 10rem;">
+  
+  <h1 class="login-header">Create a Product</h1>
+  <form method="post" th:object="${product}" th:action="@{/product/create}">
+    <div class="input-container">
+      <p class="error-message" th:errors="*{name}"></p>
+      <input type="text" placeholder="Name" th:field="*{name}">
+      <p class="error-message" th:errors="*{category}"></p>
+      <input type="text" placeholder="Category" th:field="*{category}">
     </div>
-       
-      
+    <div class="input-container">
+      <p class="error-message" th:errors="*{image}"></p>
+      <input type="text" placeholder="Image" th:field="*{image}">
+      <p class="error-message" th:errors="*{description}"></p>
+      <input type="text" placeholder="Description" th:field="*{description}">
+    </div>
+    <div class="input-container">
+      <p class="error-message" th:errors="*{stars}"></p>
+      <input type="text" placeholder="Stars" th:field="*{stars}">
+      <p class="error-message" th:errors="*{quantityInStock}"></p>
+      <input type="text" placeholder="Quantity In Stock" th:field="*{quantityInStock}">
+    </div>
+    <div class="input-container">
+      <p class="error-message" th:errors="*{ratingCount}"></p>
+      <input type="text" placeholder="Rating Count" th:field="*{ratingCount}">
+      <p class="error-message" th:errors="*{price}"></p>
+      <input type="text" placeholder="Price" th:field="*{price}">
+    </div>
 
-    </form>
+    <div style="display:block; text-align:center;">
+      <input type="submit" value="Submit" class="login-form-submit">
+    </div>
 
-    
-
+  </form>
 </main>
 <div th:insert="fragments/footer :: footer"></div>

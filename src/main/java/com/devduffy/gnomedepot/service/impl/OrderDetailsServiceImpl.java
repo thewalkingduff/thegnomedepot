@@ -7,13 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.devduffy.gnomedepot.Constants;
+import com.devduffy.gnomedepot.dto.ProductQuantityDTO;
 import com.devduffy.gnomedepot.entity.Order;
 import com.devduffy.gnomedepot.entity.OrderDetails;
+import com.devduffy.gnomedepot.entity.Product;
 import com.devduffy.gnomedepot.entity.User;
 import com.devduffy.gnomedepot.exception.OrderNotFoundException;
 import com.devduffy.gnomedepot.repository.OrderDetailsRepository;
+import com.devduffy.gnomedepot.security.AuthenticatedUserService;
 import com.devduffy.gnomedepot.service.OrderDetailsService;
-import com.devduffy.gnomedepot.service.Product;
+import com.devduffy.gnomedepot.service.OrderService;
+import com.devduffy.gnomedepot.service.ProductService;
 
 import lombok.AllArgsConstructor;
 
@@ -23,6 +27,15 @@ public class OrderDetailsServiceImpl implements OrderDetailsService{
 
     @Autowired
     OrderDetailsRepository orderDetailsRepository;
+
+    @Autowired
+    ProductService productService;
+
+    @Autowired
+    OrderService orderService;
+
+    @Autowired
+    AuthenticatedUserService authenticatedUserService;
 
     @Override
     public void submitOrderDetails(Order order, User user) {
@@ -70,6 +83,38 @@ public class OrderDetailsServiceImpl implements OrderDetailsService{
         // TODO Auto-generated method stub
         return orderDetailsRepository.findByOrderDetailsId(id);
     }
+
+
+
+    @Override
+    public OrderDetails createOrderDetails(ProductQuantityDTO productQuantityDTO) {
+        OrderDetails orderDetails = new OrderDetails();
+        Product product = productService.getProduct(productQuantityDTO.getId());
+        User user = authenticatedUserService.getCurrentUser();
+        Order order = orderService.getCurrentOrderOrNewOrder(user);
+
+        orderDetails.setOrder(order);
+        orderDetails.setProduct(product);
+        orderDetails.setQuantity(productQuantityDTO.getQuantity());
+        orderDetails.setTotal(product.getPrice() * productQuantityDTO.getQuantity());
+        return orderDetails;
+    }
+
+
+
+
+
+    
+
+
+
+   
+
+
+
+   
+
+    
 
 
 
