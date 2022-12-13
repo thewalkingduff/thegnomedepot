@@ -71,26 +71,6 @@ public class ProductController {
     Product product = productService.getProduct(id);
     ProductDTO productDTO = product.toDTO();
     model.addAttribute("productDTO", productDTO);
-    OrderDetails orderDetails = orderDetailsService.getByOrderAndProduct(orderService.getCurrentOrderOrNewOrder(authenticatedUserService.getCurrentUser()).getId(), id);
-    // Order order = orderService.getCurrentOrderOrNewOrder(authenticatedUserService.getCurrentUser());
-    // OrderDetails orderDetails = new OrderDetails();
-    // OrderDetailsDTO orderDetailsDTO = new OrderDetailsDTO();
-    // if(orderDetailsService.getByOrderAndProduct(order.getId(), id) != null) {
-    //   orderDetails = orderDetailsService.getByOrderAndProduct(order.getId(), id);
-    // }
-    //  else {
-    //   orderDetails.setOrder(order);
-    //   orderDetails.setProduct(product);
-    //   orderDetails.setQuantity(0);
-    //   orderDetails.setTotal(0.0);
-    //   orderDetailsService.save(orderDetails);
-    
-    // }
-
-    // orderDetailsDTO = orderDetails.toDTO();
-    // model.addAttribute("orderDetailsDTO", orderDetailsDTO);
-   
-   
     model.addAttribute("productQuantityDTO", new ProductQuantityDTO());
     return "productDetails";
   }

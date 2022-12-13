@@ -26,17 +26,17 @@ import com.devduffy.gnomedepot.service.impl.UserServiceImpl;
 @RunWith(MockitoJUnitRunner.class)
 public class OrderServiceTest {
     
-    @Mock
-    private OrderRepository orderRepository;
+    // @Mock
+    // private OrderRepository orderRepository;
 
-    @Mock
-    private UserRepository userRepository;
+    // @Mock
+    // private UserRepository userRepository;
 
-    @InjectMocks
-    private OrderServiceImpl orderServiceImpl;
+    // @InjectMocks
+    // private OrderServiceImpl orderServiceImpl;
 
-    @InjectMocks
-    private UserServiceImpl userServiceImpl;
+    // @InjectMocks
+    // private UserServiceImpl userServiceImpl;
 
     // @Test
     // public void createOrderTest() {

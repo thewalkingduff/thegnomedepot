@@ -87,6 +87,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order getCurrentOrderOrNewOrder(User user) {
         List<Order> allUserOrders = getListOrderOfUser(user);
+        // allUserOrders.stream()
+        // .filter(order -> order.getStatus().equals("pending"))
+        // .findAny();
+          
         for (Order o : allUserOrders) {
             String orderStatus = o.getStatus();
             if( orderStatus.equals("pending")) {

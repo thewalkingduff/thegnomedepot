@@ -1,7 +1,7 @@
-package com.devduffy.gnomedepot.config;
+// package com.devduffy.gnomedepot.config;
 
-public @interface EnableGlobalMethodSecurity {
+// public @interface EnableGlobalMethodSecurity {
 
-    boolean prePostEnabled();
+//     boolean prePostEnabled();
 
-}
+// }
