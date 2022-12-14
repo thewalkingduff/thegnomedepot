@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -87,9 +89,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order getCurrentOrderOrNewOrder(User user) {
         List<Order> allUserOrders = getListOrderOfUser(user);
-        // allUserOrders.stream()
+        // List<Order> pendingOrder = allUserOrders.stream()
         // .filter(order -> order.getStatus().equals("pending"))
-        // .findAny();
+        // .limit(1)
+        // .collect(Collectors.toList());
           
         for (Order o : allUserOrders) {
             String orderStatus = o.getStatus();
@@ -97,6 +100,7 @@ public class OrderServiceImpl implements OrderService {
                 return o;
             }  
         } 
+        // return pendingOrder == null ? new Order() : pendingOrder.get(0);
         return new Order();
     }
 

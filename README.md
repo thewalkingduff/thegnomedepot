@@ -1,15 +1,30 @@
 <h1 align="center">Welcome to THE GNOME DEPOT! 👋</h1>
-<img src="/src/main/resources/static/img/misc/GnomeDepotReadMe.png" alt=""></img>
+<img src="/src/main/resources/static/img/misc/Home.png" alt=""></img>
 <h6>MySQL Database Schema:
 <img src="/src/main/resources/static/img/misc/schema_gnome_depot.png" alt=""></img>
+<h6>Product Page:
+<img src="/src/main/resources/static/img/misc/ProductDetails.png" alt=""></img>
+<h6>Cart Page:
+<img src="/src/main/resources/static/img/misc/Cart.png" alt=""></img>
+<h6>Checkout Page:
+<img src="/src/main/resources/static/img/misc/Checkout.png" alt=""></img>
 
 # Project Title
 
-The Gnome Depot mockup ecommerce website for HTML/CSS/JAVASCRIPT SBA (Skills Based Assessment).
-This is just a starting point for the frontend for my final project website which will be built
-with SpringBoot.
+The Gnome Depot is a Spring Boot e-commerce app.
 
 
+#Main User Features:
+
+
+#Tech Stack and Accomplishments:
+The Gnome Depot is a Java Spring Boot application that uses a MySql database. Technologies include:
+
+<ul>
+    <li>Spring Web / Thymeleaf</li>
+    <li>Spring Security</li>
+    <li>Spring Validation</li>
+</ul>
 
 ## Authors
 
@@ -36,13 +51,4 @@ See `contributing.md` for ways to get started.
 
 Please adhere to this project's `code of conduct`.
 
-
-## Demo
-
-https://main.d2i0cgsif44sh0.amplifyapp.com/html/home.html
-
-
-## Deployment
-
-To deploy this project run liveserver on VS Code
 

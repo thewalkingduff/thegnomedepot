@@ -56,12 +56,13 @@ public class OrderController {
     public String getCurrentOrder(Model model) {
         User user = authenticatedUserService.getCurrentUser();
         Order order = orderService.getCurrentOrderOrNewOrder(user);
-
         List<Product> productsInCart = new ArrayList<>();
-        List<OrderDetails> orderDetails = orderDetailsService.getByOrder(order);
+        
         totalProductsInCart = 0;
         orderTotal = 0.0;
         orderService.setFieldsIfNewOrder(order, user);
+
+        List<OrderDetails> orderDetails = orderDetailsService.getByOrder(order);
         
         if (!(orderDetails.isEmpty())) {
             for (OrderDetails orderDetail : orderDetails) {
@@ -167,8 +168,6 @@ public class OrderController {
         orderTotal += item.getTotal();
         }
 
-  
-        
         order.setTotalAmount(orderTotal);
         orderService.saveOrder(order);
 
