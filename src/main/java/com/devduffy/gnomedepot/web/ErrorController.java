@@ -16,8 +16,6 @@ public class ErrorController {
     @RequestMapping(value = "/error/404")
     public String error404(HttpServletRequest request) {
         String originalUri = request.getRequestURI();
-        
-
         return "error/404";
     }
 }
