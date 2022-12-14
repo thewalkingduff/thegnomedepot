@@ -1,5 +1,5 @@
 <div th:insert="fragments/header :: header"></div>
-<main class="cart-main-container" style="margin-bottom: 10rem;">
+<main class="cart-main-container" style="margin-bottom: 15rem;">
     <section class="cart-image-details-container">
         <div class="cart-header-price-container">
             <div class="cart-header">
@@ -76,6 +76,18 @@
                     <a th:href="@{/}" class="continue-shopping-btn">Continue shopping</a>
                 </div>
             </div>
+        </section>
+        <section th:unless="${#lists.isEmpty(similarProducts)}">
+            
+            <div class="similar-products-main-container">
+                <h6 class="similar-products-header">Products related to itmes in your cart</h6>
+                <div class="similar-product-card" th:each="product: ${similarProducts}">
+                    <div  class="similar-product-container">
+                      <a  th:href="@{/product/details(id = ${product.id})}">
+                        <img  th:src="${product.image}" alt="" class="cart-similar-product">
+                      </a>
+                    </div>        
+                </div>
         </section>
     </div>
 </main>

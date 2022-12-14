@@ -1,6 +1,7 @@
 package com.devduffy.gnomedepot.web;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -56,22 +57,32 @@ public class OrderController {
         User user = authenticatedUserService.getCurrentUser();
         Order order = orderService.getCurrentOrderOrNewOrder(user);
 
+        List<Product> productsInCart = new ArrayList<>();
+        List<OrderDetails> orderDetails = orderDetailsService.getByOrder(order);
         totalProductsInCart = 0;
         orderTotal = 0.0;
-        System.out.println("categories: " + productService.getByCategory("Christmas"));
         orderService.setFieldsIfNewOrder(order, user);
-        System.out.println(orderService.getOrderById(27));
-        if (!(orderDetailsService.getByOrder(order).isEmpty())) {
-            for (OrderDetails orderDetail : orderDetailsService.getByOrder(order)) {
+        
+        if (!(orderDetails.isEmpty())) {
+            for (OrderDetails orderDetail : orderDetails) {
                 totalProductsInCart += orderDetail.getQuantity();
                 orderTotal += orderDetail.getTotal();
+                productsInCart.add(orderDetail.getProduct());
             }
         }
-
+        
+        if(!(orderDetails.isEmpty())) {
+            List<Product> similarProducts = new ArrayList<Product>();
+            for (int i = 0; i < orderDetails.size(); i++) {
+                similarProducts.add(productService.getSimilarProducts(orderDetails.get(i).getProduct().getCategory().substring(0, 3), orderDetails.get(i).getProduct().getId())) ;
+            }
+            model.addAttribute("similarProducts", similarProducts);
+        }
+          
         order.setTotalAmount(orderTotal);
         orderService.saveOrder(order);
-
-        model.addAttribute("orderDetails", orderDetailsService.getByOrder(order));
+        
+        model.addAttribute("orderDetails", orderDetails);
         model.addAttribute("order", order);
         model.addAttribute("totalProductsInCart", totalProductsInCart);
         model.addAttribute("orderTotal", orderTotal);

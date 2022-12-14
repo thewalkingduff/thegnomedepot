@@ -16,6 +16,6 @@ public interface ProductService {
     @Transactional
     List<Product> getByNameContaining(String name);
     void updateProductQuantityInStock(List<OrderDetails> orderDetailsItem);
-    List<Product> getByCategory(String category);
+    Product getSimilarProducts(String category, Integer prodId);
 
 }

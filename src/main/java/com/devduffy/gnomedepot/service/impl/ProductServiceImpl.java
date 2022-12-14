@@ -58,8 +58,8 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public List<Product> getByCategory(String category) {
-        return productRepository.findByCategory(category);
+    public Product getSimilarProducts(String category, Integer prodId) {
+        return productRepository.findSimilarProducts(category, prodId);
     }
 
    
