@@ -1,56 +1,51 @@
+<div th:insert="fragments/header :: header"></div>
 
-  <div th:insert="fragments/header :: header"></div>
-
-
-  <main class="main-container">
-    <section class="login-container">
-      <h1 class="login-header">Register</h1>
-      <form method="post" th:object="${createUserForm}" th:action="@{/user/register}"> 
-       
-        <div class="input-container">
-          <p class="error-message" th:errors="*{firstName}"></p>
-          <input type="text" placeholder="First Name" th:field="*{firstName}">
-          <p class="error-message" th:errors="*{lastName}"></p>
-          <input type="text" placeholder="Last Name" th:field="*{lastName}">
-        </div>
-        <div class="input-container">
-          <p class="error-message" th:errors="*{username}"></p>
-          <input type="text" placeholder="Username" th:field="*{username}">
-          <p class="error-message" th:errors="*{password}"></p>
-          <input type="text" placeholder="Password" th:field="*{password}">
-          <p class="error-message" th:errors="*{confirmPassword}"></p>
-          <input type="text" placeholder="Confirm Password" th:field="*{confirmPassword}">
-        </div>
-        <div>
-          <p class="error-message" th:errors="*{address}"></p>
-          <input type="text" placeholder="Address" th:field="*{address}">        
-        </div>   
-        <div class="input-container">
-          <p class="error-message" th:errors="*{city}"></p>
-          <input type="text" placeholder="City" th:field="*{city}">
-          <p class="error-message" th:errors="*{state}"></p>
-          <input type="text" placeholder="State" th:field="*{state}">
-        </div>
-        <div class="input-container">
-          <p class="error-message" th:errors="*{zip}"></p>
-          <input type="text" placeholder="Zip Code" th:field="*{zip}">
-          <p class="error-message" th:errors="*{phone}" ></p>
-          <input type="text" placeholder="Phone" th:field="*{phone}">
-        </div>
-        <div class="input-container">
-          <p class="error-message" th:errors="*{email}"></p>
-          <input type="text" placeholder="Email" th:field="*{email}">
-        </div>
-        <div class="input-container">
-        </div>
-          <input type="submit" value="Submit" class="login-form-submit">
-        </div>
-
-      </form>
-
-        <div>
-            <p>Already a member?<a href="/index.html" class="sign-up-text"> Login here.</a></p>
-        </div>
-    </section>
-  </main>
-  <div th:insert="fragments/footer :: footer"></div>
+<main class="main-container">
+  <section class="login-container">
+    <h1 class="login-header">Register</h1>
+    <form method="post" th:object="${createUserForm}" th:action="@{/user/register}">
+      <div class="input-container">
+        <p class="error-message" th:errors="*{firstName}"></p>
+        <input type="text" placeholder="First Name" th:field="*{firstName}">
+        <p class="error-message" th:errors="*{lastName}"></p>
+        <input type="text" placeholder="Last Name" th:field="*{lastName}">
+      </div>
+      <div class="input-container">
+        <p class="error-message" th:errors="*{username}"></p>
+        <input type="text" placeholder="Username" th:field="*{username}">
+        <p class="error-message" th:errors="*{password}"></p>
+        <input type="text" placeholder="Password" th:field="*{password}">
+        <p class="error-message" th:errors="*{confirmPassword}"></p>
+        <input type="text" placeholder="Confirm Password" th:field="*{confirmPassword}">
+      </div>
+      <div>
+        <p class="error-message" th:errors="*{address}"></p>
+        <input type="text" placeholder="Address" th:field="*{address}">
+      </div>
+      <div class="input-container">
+        <p class="error-message" th:errors="*{city}"></p>
+        <input type="text" placeholder="City" th:field="*{city}">
+        <p class="error-message" th:errors="*{state}"></p>
+        <input type="text" placeholder="State" th:field="*{state}">
+      </div>
+      <div class="input-container">
+        <p class="error-message" th:errors="*{zip}"></p>
+        <input type="text" placeholder="Zip Code" th:field="*{zip}">
+        <p class="error-message" th:errors="*{phone}"></p>
+        <input type="text" placeholder="Phone" th:field="*{phone}">
+      </div>
+      <div class="input-container">
+        <p class="error-message" th:errors="*{email}"></p>
+        <input type="text" placeholder="Email" th:field="*{email}">
+      </div>
+      <div class="input-container">
+      </div>
+      <input type="submit" value="Submit" class="login-form-submit">
+      </div>
+    </form>
+    <div>
+      <p>Already a member?<a href="/index.html" class="sign-up-text"> Login here.</a></p>
+    </div>
+  </section>
+</main>
+<div th:insert="fragments/footer :: footer"></div>

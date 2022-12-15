@@ -29,10 +29,6 @@ import com.devduffy.gnomedepot.service.OrderService;
 import com.devduffy.gnomedepot.service.ProductService;
 import com.devduffy.gnomedepot.service.UserService;
 
-import lombok.extern.slf4j.Slf4j;
-
-
-@Slf4j
 @Controller
 public class OrderController {
 

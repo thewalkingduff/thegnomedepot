@@ -71,22 +71,20 @@
             </div>
             <hr style="margin-top: 2rem;">
             <div class="justify-items-start margin-continue">
-
                 <div>
                     <a th:href="@{/}" class="continue-shopping-btn">Continue shopping</a>
                 </div>
             </div>
         </section>
         <section th:unless="${#lists.isEmpty(similarProducts)}">
-            
             <div class="similar-products-main-container">
                 <h6 class="similar-products-header">Products related to items in your cart</h6>
                 <div class="similar-product-card" th:each="product: ${similarProducts}">
-                    <div  class="similar-product-container">
-                      <a  th:href="@{/product/details(id = ${product.id})}">
-                        <img  th:src="${product.image}" alt="" class="cart-similar-product">
-                      </a>
-                    </div>        
+                    <div class="similar-product-container">
+                        <a th:href="@{/product/details(id = ${product.id})}">
+                            <img th:src="${product.image}" alt="" class="cart-similar-product">
+                        </a>
+                    </div>
                 </div>
         </section>
     </div>

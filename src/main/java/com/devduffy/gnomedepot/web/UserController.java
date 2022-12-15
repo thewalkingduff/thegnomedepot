@@ -1,6 +1,5 @@
 package com.devduffy.gnomedepot.web;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,11 +22,9 @@ import com.devduffy.gnomedepot.repository.UserRoleRepository;
 import com.devduffy.gnomedepot.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 
-
 @Slf4j
 @Controller
 public class UserController {
-    // List<User> users = new ArrayList<>();
 
     @Autowired
     UserService userService;
@@ -40,6 +37,7 @@ public class UserController {
 	private PasswordEncoder passwordEncoder;
 
     @GetMapping("/user/login")
+
     public String getLoginForm(Model model) {
         model.addAttribute("user", new User());
         return "login";
@@ -47,10 +45,11 @@ public class UserController {
 
     @PostMapping("/user/login")
     public String loginUser(@Valid User user, BindingResult result) {
-        // if(user.getLastName().equals(user.getFirstName())) result.rejectValue("lastName", "", "Last name can not equal first name.");
-        if(result.hasErrors()) return "login";
-        // userService.saveUser(user);
-        return "redirect:/result"; 
+        if (user.getLastName().equals(user.getFirstName()))
+            result.rejectValue("lastName", "", "Last name can not equal first name.");
+        if (result.hasErrors())
+            return "login";
+        return "redirect:/result";
     }
 
     @GetMapping("/user/register")
@@ -62,14 +61,17 @@ public class UserController {
 
     @PostMapping("/user/register")
     public String createUser(@Valid CreateUserForm form, BindingResult result) {
-        if(form.getLastName().equals(form.getFirstName())) result.rejectValue("lastName", "", "Last name can not equal first name.");
-        if(!(form.getPassword().equals(form.getConfirmPassword()))) result.rejectValue("confirmPassword", "", "Passwords do not match. Please try again.");
-        
-        if(result.hasErrors()) return "register";
+        if (form.getLastName().equals(form.getFirstName()))
+            result.rejectValue("lastName", "", "Last name can not equal first name.");
+        if (!(form.getPassword().equals(form.getConfirmPassword())))
+            result.rejectValue("confirmPassword", "", "Passwords do not match. Please try again.");
+
+        if (result.hasErrors())
+            return "register";
 
         User user = new User();
         String encodedPassword = passwordEncoder.encode(form.getPassword());
-		user.setPassword(encodedPassword);
+        user.setPassword(encodedPassword);
         user.setCreateDate(new Date());
         user.setFirstName(form.getFirstName());
         user.setLastName(form.getLastName());
@@ -86,7 +88,7 @@ public class UserController {
         ur.setRoleName("USER");
         ur.setUserId(user.getId());
         userRoleRepository.save(ur);
-        return "success-register"; 
+        return "success-register";
     }
 
     @GetMapping("/user/{id}")

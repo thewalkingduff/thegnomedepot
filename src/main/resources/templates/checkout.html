@@ -27,13 +27,8 @@
             <p class="user-shipping-text" th:text="${user.city} + ', ' + ${user.state} + ' ' + ${user.postalCode}"></p>
             <p class="teal-text" style="margin-left: 0;">Add delivery instructions</p>
           </div>
-
         </div>
-
       </div>
-      <!-- <div class="payment-container">
-              <h5 class="cart-price-header">2   Payment Method</h5>
-          </div> -->
     </div>
     <hr class="hr-above-products">
     <div class="shipping-container-div">
@@ -41,11 +36,10 @@
     </div>
     <div class="checkout-product-details-main-container">
       <form method="post" th:object="${cartItem}" th:action="@{/order/checkout/update}" th:each="od: ${orderDetails}">
-        <div class="checkout-product-container" >
+        <div class="checkout-product-container">
           <div>
             <img th:src="${od.product.image}" alt="" width="180px">
           </div>
-  
           <div class="checkout-product-list">
             <input type="hidden" th:name="id" th:value="${od.id}" />
             <div>
@@ -57,39 +51,29 @@
               <span class="checkout-price-text" th:utext="${#numbers.formatCurrency(od.total)}">
               </span>
             </div>
-           
+
             <div class="checkout-quantity-container">
               <select th:name="quantity" th:value="${od.quantity}" onchange="this.form.submit()">
                 <option th:value="${od.quantity}" th:text="${'Qty: ' + od.quantity}" selected></option>
                 <option th:each="i : ${#numbers.sequence(0, 20)}" th:value="${i}" th:text="${i}">
                 </option>
               </select>
-           
-              <!-- <div>
-                <i class="icon-text-separator" role="img" aria-label="|"></i>
-                <a th:href="@{/order/delete(id=${od.id})}" class="teal-text">
-                  Delete
-                </a>
-              </div> -->
             </div>
           </div>
           <div class="choose-delivery-container">
             <div>
               <p style="margin: 0;">Choose a delivery option</p>
-              <input type="radio"  name="fav_language" value="" checked>
-                <label for="html" class="green-text-checkout" >Monday, Dec. 19 - Tuesday, Dec. 20</label><br>
+              <input type="radio" name="fav_language" value="" checked>
+                <label for="html" class="green-text-checkout">Monday, Dec. 19 - Tuesday, Dec. 20</label><br>
             </div>
-            
           </div>
         </div>
       </form>
     </div>
-   
     <hr class="checkout-hr-middle">
   </section>
   <section class="submit-order-button-subtotal-container" th:object="${order}">
     <div class="justify-items-start">
-
       <div class="submit-order-container">
         <div class="submit-button-container">
           <a th:href="@{/order/submit(id=${order.id})}" class="checkout-btn">Place your order</a>
@@ -100,7 +84,7 @@
               use</span>.</p>
         </div>
       </div>
-      <hr  class="hr-above-order-summary">
+      <hr class="hr-above-order-summary">
       <div class="order-summary-container">
         <h6 class="checkout-header">Order Summary</h6>
         <table>
@@ -113,8 +97,10 @@
             <td style="padding-right: 95px;" class="order-summary-details">
               Shipping & handling:
             </td>
-            <td th:if="${totalProductsInCart > 0}" th:text="${#numbers.formatCurrency(3.99)}" class="order-summary-details"></td>
-            <td th:unless="${totalProductsInCart > 0}" th:text="${#numbers.formatCurrency(0)}" class="order-summary-details"></td>
+            <td th:if="${totalProductsInCart > 0}" th:text="${#numbers.formatCurrency(3.99)}"
+              class="order-summary-details"></td>
+            <td th:unless="${totalProductsInCart > 0}" th:text="${#numbers.formatCurrency(0)}"
+              class="order-summary-details"></td>
             <td>
               <hr class="checkout-hr">
             </td>
@@ -124,8 +110,10 @@
             <td style="padding-right: 95px;" class="order-summary-details">
               Total before tax:
             </td>
-            <td th:if="${totalProductsInCart > 0}" th:text="${#numbers.formatCurrency(orderTotal + 3.99)}" class="order-summary-details"></td>
-            <td th:unless="${totalProductsInCart > 0}" th:text="${#numbers.formatCurrency(0)}" class="order-summary-details"></td>
+            <td th:if="${totalProductsInCart > 0}" th:text="${#numbers.formatCurrency(orderTotal + 3.99)}"
+              class="order-summary-details"></td>
+            <td th:unless="${totalProductsInCart > 0}" th:text="${#numbers.formatCurrency(0)}"
+              class="order-summary-details"></td>
           </tr>
           <tr>
             <td style="padding-right: 95px;" class="order-summary-details">
@@ -137,28 +125,33 @@
         <hr class="checkout-hr-bottom">
         <div>
           <h6 class="subtotal-text">Order Total:
-            <span th:if="${totalProductsInCart > 0}" th:text="${#numbers.formatCurrency(orderTotal + 3.99 + (orderTotal * 0.06))}"
+            <span th:if="${totalProductsInCart > 0}"
+              th:text="${#numbers.formatCurrency(orderTotal + 3.99 + (orderTotal * 0.06))}"
               class="subtotal-text subtotal-span">
             </span>
             <span th:unless="${totalProductsInCart > 0}" th:text="${#numbers.formatCurrency(0)}"
               class="subtotal-text subtotal-span">
-              </span>
+            </span>
           </h6>
         </div>
       </div>
     </div>
   </section>
-  <p class="checkout-fine-print">
+    <p class="checkout-fine-print">
 
-*Why has sales tax been applied? <span class="teal-text-fine">See tax and seller information.</span> <br><br>
-Need help? Check our <span class="teal-text-fine">Help pages</span>  or <span class="teal-text-fine">contact us</span><br><br>
-For an item sold by GnomeDepot.com: When you click the "Place your order" button, we'll send you an email message acknowledging receipt of your order. Your contract to purchase an item will not be complete until we send you an email notifying you that the item has been shipped.<br><br>
-<span class="teal-text-fine">Important information about sales tax you may owe in your state</span><br><br>
-You may return new, unopened merchandise in original condition within 30 days of delivery. Exceptions and restrictions apply. See GnomeDepot.com's <span class="teal-text-fine">Returns Policy.</span><br><br>
-Need to add more items to your order? Continue shopping on the <span class="teal-text-fine">GnomeDepot.com homepage.</span>
-  </p>
-</main>
-
-
+      *Why has sales tax been applied? <span class="teal-text-fine">See tax and seller information.</span> <br><br>
+      Need help? Check our <span class="teal-text-fine">Help pages</span> or <span class="teal-text-fine">contact
+        us</span><br><br>
+      For an item sold by GnomeDepot.com: When you click the "Place your order" button, we'll send you an email message
+      acknowledging receipt of your order. Your contract to purchase an item will not be complete until we send you an
+      email notifying you that the item has been shipped.<br><br>
+      <span class="teal-text-fine">Important information about sales tax you may owe in your state</span><br><br>
+      You may return new, unopened merchandise in original condition within 30 days of delivery. Exceptions and
+      restrictions apply. See GnomeDepot.com's <span class="teal-text-fine">Returns Policy.</span><br><br>
+      Need to add more items to your order? Continue shopping on the <span class="teal-text-fine">GnomeDepot.com
+        homepage.</span>
+    </p>
+  </main>
 </body>
+
 </html>

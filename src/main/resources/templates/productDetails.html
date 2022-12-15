@@ -1,42 +1,46 @@
 <div th:insert="fragments/header :: header"></div>
 <main class="prod-details-main-container" th:object="${productDTO}">
-  <section >
+  <section>
     <div class="prod-detail-image-container">
       <h6 th:text="${productDTO.name}"></h6>
       <div style="margin-bottom: 1rem;">
-        <p th:text="${productDTO.stars}" id="product-stars" style="display: inline;"></p><span th:text="${' (' + productDTO.ratingCount + ')'}" ></span>
-      
+        <p th:text="${productDTO.stars}" id="product-stars" style="display: inline;"></p>
+        <span th:text="${' (' + productDTO.ratingCount + ')'}"></span>
       </div>
       <div>
         <img th:src="${productDTO.image}" alt="" width="600">
       </div>
   </section>
-  <section class="prod-details-add-cart-container" >
-    <div >
+  <section class="prod-details-add-cart-container">
+    <div>
       <h5 th:text="${#numbers.formatCurrency(productDTO.price)}"></h5>
     </div>
-    <div >
+    <div>
       <form method="post" th:object="${productQuantityDTO}" th:action="@{/order/add}" class="prod-details-form">
         <input type="hidden" th:name="id" th:value="${productDTO.id}" />
-        <p th:if="${productDTO.quantityInStock < 10}" th:text="${'Only ' + productDTO.quantityInStock + ' left in stock - order soon.'}" class="red-low-stock-text"></p>
+        <p th:if="${productDTO.quantityInStock < 10}"
+          th:text="${'Only ' + productDTO.quantityInStock + ' left in stock - order soon.'}" class="red-low-stock-text">
+        </p>
         <select th:name="quantity" th:value="${quantity}" class="quantity-dropdown">
           <option th:value="${1}" th:text="${'Qty: ' + 1}" selected></option>
           </option>
-          <option th:each="i : ${#numbers.sequence(1, 20)}" th:value="${i}" th:text="${i}" >
+          <option th:each="i : ${#numbers.sequence(1, 20)}" th:value="${i}" th:text="${i}">
           </option>
-      </select>
-      <input type="submit" value="Add to cart" class="prod-details-add-btn"></a>
+        </select>
+        <input type="submit" value="Add to cart" class="prod-details-add-btn"></a>
       </form>
-  </div>
+    </div>
   </section>
 </main>
-
 <section class="about-item-section" th:object="${productDTO}">
   <h3 class="black-text-header">About this item</h3>
   <p style="margin: 0;">
-    <a class="btn details-btn" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Details</a>
-    <button class="btn details-btn" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Shipping & Returns</button>
-    <button class="btn details-btn" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample3" aria-expanded="false" aria-controls="multiCollapseExample3">Q & A</button>
+    <a class="btn details-btn" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button"
+      aria-expanded="false" aria-controls="multiCollapseExample1">Details</a>
+    <button class="btn details-btn" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample2"
+      aria-expanded="false" aria-controls="multiCollapseExample2">Shipping & Returns</button>
+    <button class="btn details-btn" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample3"
+      aria-expanded="false" aria-controls="multiCollapseExample3">Q & A</button>
   </p>
   <hr>
   <div class="row">
@@ -49,15 +53,17 @@
     <div class="col">
       <div class="collapse multi-collapse" id="multiCollapseExample2">
         <div class="card card-body">
-          <h6>Shipping details</h6> 
+          <h6>Shipping details</h6>
           Estimated ship dimensions: 4 inches length x 4 inches width x 11 inches height
           Estimated ship weight: 0.5 pounds
-          This item cannot be shipped to the following locations: APO/FPO, American Samoa, Guam, Northern Mariana Islands, Puerto Rico, United States Minor Outlying Islands, Virgin Islands, U.S., Alaska, Hawaii
+          This item cannot be shipped to the following locations: APO/FPO, American Samoa, Guam, Northern Mariana
+          Islands, Puerto Rico, United States Minor Outlying Islands, Virgin Islands, U.S., Alaska, Hawaii
           item ships from third party seller: Christmas Central
-          
-          <h6 style="margin-top: 1rem;">Return details</h6> 
+
+          <h6 style="margin-top: 1rem;">Return details</h6>
           This item can be returned to any Target store or Target.com.
-          This item must be returned within 90 days of the date it was purchased in store, shipped, delivered by a Shipt shopper, or made ready for pickup.
+          This item must be returned within 90 days of the date it was purchased in store, shipped, delivered by a Shipt
+          shopper, or made ready for pickup.
           See the return policy for complete information.
         </div>
       </div>
