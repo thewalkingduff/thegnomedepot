@@ -27,6 +27,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.devduffy.gnomedepot.dto.OrderDTO;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -37,6 +38,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Getter
+@Setter
+@EqualsAndHashCode
 @Table(name = "orders")
 public class Order {
 

@@ -13,4 +13,5 @@ public interface UserService {
     List<User> getUsers();
     List<Order> getOrders(Integer id);
     User getUserByEmail(String email);
+    Boolean isUserAuthenticated(String email);
 }

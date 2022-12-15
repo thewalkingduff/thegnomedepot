@@ -15,12 +15,12 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import com.devduffy.gnomedepot.entity.Order;
 import com.devduffy.gnomedepot.entity.User;
-import com.devduffy.gnomedepot.repository.OrderRepository;
+import com.devduffy.gnomedepot.repository.UserRepository;
 
 @RunWith(MockitoJUnitRunner.class)
-public class OrderRepositoryTest {
+public class UserRepositoryTest {
     @Mock
-    private OrderRepository orderRepository;
+    private UserRepository userRepository;
 
     @Test
     public void findOrderByUserFromRepoTest() {
@@ -30,14 +30,14 @@ public class OrderRepositoryTest {
         user.setPassword("password");
         user.setEmail("ericcole@gmail.com");
         user.setCreateDate(new Date());
-
+        
         List<Order> orders = new ArrayList<>();
         Order order = new Order();
         orders.add(order);
-        when(orderRepository.findByUser(user)).thenReturn((orders));
+        when(userRepository.findByEmail("ericcole@gmail.com")).thenReturn((user));
 
-        List<Order> result = orderRepository.findByUser(user);
+        User result = userRepository.findByEmail("ericcole@gmail.com");
 
-        assertEquals(orders, result);
+        assertEquals(user, result);
     }
 }

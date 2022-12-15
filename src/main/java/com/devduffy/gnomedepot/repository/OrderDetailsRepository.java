@@ -1,14 +1,13 @@
 package com.devduffy.gnomedepot.repository;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import com.devduffy.gnomedepot.entity.Order;
 import com.devduffy.gnomedepot.entity.OrderDetails;
-import com.devduffy.gnomedepot.entity.Product;
+
 
 public interface OrderDetailsRepository extends CrudRepository<OrderDetails, Long> {
 
@@ -21,8 +20,5 @@ public interface OrderDetailsRepository extends CrudRepository<OrderDetails, Lon
 
     @Query(value = "select * from orderdetails where id = :id", nativeQuery = true)
     OrderDetails findByOrderDetailsId(Integer id);
-
-   
-   
 
 }

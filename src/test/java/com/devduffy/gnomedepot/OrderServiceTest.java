@@ -1,12 +1,14 @@
 package com.devduffy.gnomedepot;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.devduffy.gnomedepot.entity.Order;
+import com.devduffy.gnomedepot.repository.OrderRepository;
+import com.devduffy.gnomedepot.service.impl.OrderServiceImpl;
+
 import static org.mockito.Mockito.when;
+
+import java.util.Date;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,45 +16,30 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.devduffy.gnomedepot.entity.Order;
-import com.devduffy.gnomedepot.entity.User;
-import com.devduffy.gnomedepot.repository.OrderRepository;
-import com.devduffy.gnomedepot.repository.UserRepository;
-import com.devduffy.gnomedepot.service.impl.OrderServiceImpl;
-import com.devduffy.gnomedepot.service.impl.UserServiceImpl;
-
-
 
 @RunWith(MockitoJUnitRunner.class)
 public class OrderServiceTest {
-    
-    // @Mock
-    // private OrderRepository orderRepository;
 
-    // @Mock
-    // private UserRepository userRepository;
+    @Mock
+    private OrderRepository orderRepository;
 
-    // @InjectMocks
-    // private OrderServiceImpl orderServiceImpl;
+    @InjectMocks
+    private OrderServiceImpl orderServiceImpl;
 
-    // @InjectMocks
-    // private UserServiceImpl userServiceImpl;
+    @Test
+    public void findByOrderIdTest() {
+        Order order = new Order();
+        order.setId(23);
+        order.setOrderDate(new Date());
+        order.setStatus("complete");
+        order.setUser(new com.devduffy.gnomedepot.entity.User());
+        order.setTotalAmount(64.1662);
 
-    // @Test
-    // public void createOrderTest() {
-    //     Order order = new Order();
-    //     order.setId(40);
-    //     order.setOrderDate(new Date());
-    //     order.setStatus("complete");
-    //     order.setShippedDate(null);
-    //     order.setTotalAmount(77.52);
-    //     order.setUser(new User());
+        when(orderRepository.findByOrderId(23)).thenReturn(order) ;
 
-    //     Order newOrder = orderServiceImpl.createOrder(order);
+        Double result = orderServiceImpl.getOrderById(23).getTotalAmount();
 
-    //     assertEquals(40, newOrder.getId());
+        assertEquals(64.1662, result);
+    }
 
-    // }
-
-    
 }

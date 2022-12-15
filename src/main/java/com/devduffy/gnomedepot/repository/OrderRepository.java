@@ -16,6 +16,6 @@ public interface OrderRepository extends CrudRepository<Order, Long>{
     List<Order> findByUser(User user);
 
     @Query(value = "select * from orders where id = :id", nativeQuery = true)
-    Order findByOrderId(Integer id);
+    public Order findByOrderId(Integer id);
     
 }

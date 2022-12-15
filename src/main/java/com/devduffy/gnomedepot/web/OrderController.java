@@ -140,13 +140,13 @@ public class OrderController {
     @Transactional
     @PostMapping("/order/checkout/update")
     public String updateCheckoutOrder(Model model, @ModelAttribute CartItem cartItem, BindingResult result, RedirectAttributes redirectAttributes) {
-        OrderDetails product = orderDetailsService.getByOrderDetailsId(cartItem.getId());
-        product.setQuantity(cartItem.getQuantity());
-        product.setTotal(product.getProduct().getPrice() * cartItem.getQuantity());
-        if (product.getQuantity() == 0) {
+        OrderDetails item = orderDetailsService.getByOrderDetailsId(cartItem.getId());
+        item.setQuantity(cartItem.getQuantity());
+        item.setTotal(item.getProduct().getPrice() * cartItem.getQuantity());
+        if (item.getQuantity() == 0) {
             orderDetailsService.deleteItemFromOrder(cartItem.getId());
         } else {
-            orderDetailsService.save(product);
+            orderDetailsService.save(item);
         }
         redirectAttributes.addAttribute("id",
                 orderService.getCurrentOrderOrNewOrder(authenticatedUserService.getCurrentUser()).getId());

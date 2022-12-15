@@ -4,19 +4,16 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+
 import static org.mockito.Mockito.when;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.devduffy.gnomedepot.entity.Product;
 import com.devduffy.gnomedepot.repository.ProductRepository;
-import com.devduffy.gnomedepot.service.impl.ProductServiceImpl;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProductRepositoryTest {
