@@ -38,6 +38,9 @@ The Gnome Depot is a Java Spring Boot application that uses a MySql database. Te
     <li>Lombok</li>
 </ul>
 
+<h6>Most of the frontend was written from scratch with HTML, CSS, JavaScript and Thymeleaf.  The frontend design is inspired by the layouts on Amazon, Target and The Home Depot.  If you view Amazon's checkout page, my checkout page looks very similar to it.  I considered it a challenge to see if I could make my checkout page look like it and I'm happy with the results.</h6>
+<h6>I added a "Product related to items in your cart" container on the cart page that I think it pretty cool.  I also created the "THE GNOME DEPOT" logo from scratch on Canva.</h6>
+
 ## Authors
 
 - [@duffManCode](https://www.github.com/thewalkingduff)
