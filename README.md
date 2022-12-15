@@ -1,12 +1,12 @@
 <h1 align="center">Welcome to THE GNOME DEPOT! 👋</h1>
 <img src="/src/main/resources/static/img/misc/Home.png" alt=""></img>
-<h6>MySQL Database Schema:
+<h4>MySQL Database Schema:</h4>
 <img src="/src/main/resources/static/img/misc/schema_gnome_depot.png" alt=""></img>
-<h6>Product Page:
+<h4>Product Page:</h4>
 <img src="/src/main/resources/static/img/misc/ProductDetails.png" alt=""></img>
-<h6>Cart Page:
+<h4>Cart Page:</h4>
 <img src="/src/main/resources/static/img/misc/Cart.png" alt=""></img>
-<h6>Checkout Page:
+<h4>Checkout Page:</h4>
 <img src="/src/main/resources/static/img/misc/Checkout.png" alt=""></img>
 
 # THE GNOME DEPOT
