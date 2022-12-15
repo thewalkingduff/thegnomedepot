@@ -16,7 +16,7 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
 	@Query("SELECT p FROM Product p where p.name = :name")
 	public List<Product> findByProductName(String name);
 
-	// @Query("SELECT p FROM Product p where p.category like %:category% and p.id != :prodId limit 1")
+	// @Query("SELECT p FROM Product p where p.category like %:category% and p.id != :prodId")
 	// Product findSimilarProducts(String category, Integer prodId);
 	@Query(value = "SELECT * FROM products p where p.category like %:category% and p.id != :prodId limit 1", nativeQuery = true)
 	Product findSimilarProducts(String category, Integer prodId);

@@ -89,6 +89,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order getCurrentOrderOrNewOrder(User user) {
         List<Order> allUserOrders = getListOrderOfUser(user);
+
         // List<Order> pendingOrder = allUserOrders.stream()
         // .filter(order -> order.getStatus().equals("pending"))
         // .limit(1)
@@ -101,8 +102,8 @@ public class OrderServiceImpl implements OrderService {
             }  
         } 
         // return pendingOrder == null ? new Order() : pendingOrder.get(0);
-        return new Order();
-    }
+         return new Order();
+     }
 
     @Override
     public void setFieldsIfNewOrder(Order order, User user) {

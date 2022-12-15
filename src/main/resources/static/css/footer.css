@@ -7,13 +7,10 @@
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 2rem;
   }
-.footer-div-container {
-   
-padding-right: 3rem;
-   
-  }
+.footer-div-container {  
+  padding-right: 3rem;
+}
 .footer-container div ul {
- 
     list-style: none;
     text-align: left;
 }
@@ -24,44 +21,29 @@ padding-right: 3rem;
   font-size: 14px;
   color: #dddddd;
 }
- 
-  
-  a.menu:hover {
-    background-color:yellow;
-    font-size:20px;
-  }
-  .product-details-text {
-      margin: 0;
-  }
-  .link-black-text {
-      color: #0F1111;
-      text-decoration: none;
-  }
-  .footer-home-link {
-    /* position: absolute;
-    bottom: 5px;
-    left: 25px; */
-  }
-  .footer-about-link {
-    /* position: absolute;
-    bottom: 5px;
-    left: 100px; */
-  }
-  .link {
+a.menu:hover {
+  background-color:yellow;
+  font-size:20px;
+}
+.product-details-text {
+    margin: 0;
+}
+.link-black-text {
+    color: #0F1111;
     text-decoration: none;
-    color: #fff;
-    margin: 0 1rem;
-  }
-  .link:hover {
- 
-    color: yellow;
-    
-  }
-  .footer-header {
-    font-size: 16px;
-    color: white;
-  }
-  .footer-logo-container {
-    padding: 0;
-  }
- 
+}
+.link {
+  text-decoration: none;
+  color: #fff;
+  margin: 0 1rem;
+}
+.link:hover {
+  color: yellow;
+}
+.footer-header {
+  font-size: 16px;
+  color: white;
+}
+.footer-logo-container {
+  padding: 0;
+}

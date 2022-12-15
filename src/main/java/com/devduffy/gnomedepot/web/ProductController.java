@@ -75,32 +75,6 @@ public class ProductController {
     return "productDetails";
   }
 
-  // @Transactional
-  //   @PostMapping("/product/details")
-  //   public String updateOrder(@ModelAttribute CartItem cartItem, BindingResult result, RedirectAttributes redirectAttributes)  {
-      
-  //       Product product = productService.getProduct(cartItem.getId());
-  //       // OrderDetails item = orderDetailsService.getByOrderDetailsId(cartItem.getId());
-  //       // if(orderDetailsService.getByOrderDetailsId(cartItem.getId()) != null) {
-  //       //     item = orderDetailsService.getByOrderDetailsId(cartItem.getId());
-  //       // } else {
-  //       //   item.setOrder(orderService.getCurrentOrderOrNewOrder(authenticatedUserService.getCurrentUser()));
-  //       //   item.setProduct(product);
-  //       //   item.setQuantity(cartItem.getQuantity());
-  //       //   item.setTotal(product.getPrice() * cartItem.getQuantity());
-  //       // }
-
-  //       // item.setQuantity(cartItem.getQuantity());
-
-  //       // if(item.getQuantity() == 0) {
-  //       //     orderDetailsService.deleteItemFromOrder(null);
-  //       // } else {
-  //       //     orderDetailsService.save(item);
-  //       // }
-  //       redirectAttributes.addAttribute("id", item.getProduct().getId());
-  //       return "redirect:/order/current";
-  //   }
-
   @GetMapping("/product/create")
   public String productForm(Model model) {
     model.addAttribute("product", new Product());

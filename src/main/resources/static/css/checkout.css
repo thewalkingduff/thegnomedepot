@@ -1,6 +1,7 @@
 body {
     background: #fff;
-}.navbar-checkout {
+}
+.navbar-checkout {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -53,9 +54,6 @@ body {
     display: flex;
     justify-content: flex-start;
     gap: 3rem;
-}
-.checkout-product-details-main-container {
-   
 }
 .checkout-product-container {
     background: #fff;
@@ -113,9 +111,6 @@ body {
     color:#007185;
     text-decoration:none;
     margin: 0rem;
-}
-.hr-above-products {
-    /* margin: 0rem 0 .5rem; */
 }
 .checkout-hr-bottom {
     margin: .15rem 0 .85rem;

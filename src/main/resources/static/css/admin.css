@@ -21,8 +21,7 @@
     margin-top: 5rem;
     height: 2.5rem;
     text-decoration: none;
-    box-shadow: 0 3px 0 #c14c00;
-    
+    box-shadow: 0 3px 0 #c14c00; 
 }
 .admin-sign-out-btn:hover {
     cursor: pointer;

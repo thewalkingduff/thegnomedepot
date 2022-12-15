@@ -75,7 +75,10 @@ public class OrderController {
         if(!(orderDetails.isEmpty())) {
             List<Product> similarProducts = new ArrayList<Product>();
             for (int i = 0; i < orderDetails.size(); i++) {
-                similarProducts.add(productService.getSimilarProducts(orderDetails.get(i).getProduct().getCategory().substring(0, 3), orderDetails.get(i).getProduct().getId())) ;
+                Product similarProduct = productService.getSimilarProducts(orderDetails.get(i).getProduct().getCategory().substring(0, 3), orderDetails.get(i).getProduct().getId());
+                if(similarProduct != null) {
+                    similarProducts.add(similarProduct);
+                }  
             }
             model.addAttribute("similarProducts", similarProducts);
         }
