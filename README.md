@@ -39,8 +39,8 @@ The Gnome Depot is a Java Spring Boot application that uses a MySql database. Te
 </ul>
 
 <h6>Most of the front end was written from scratch with HTML, CSS, JavaScript, and Thymeleaf.  The layouts on Amazon, Target and The Home Depot inspire the front-end design.  For example, if you view Amazon's checkout page, my checkout page looks very similar to it.  I considered it a challenge to make my checkout page look like it, and I'm happy with the results.</h6>
-<h6>I added a "Product related to items in your cart" container on the cart page that I think is pretty cool.  I also created the "THE GNOME DEPOT" logo from scratch on Canva.</h6>
-<h6>Adding the ability for the user to choose the number of items was challenging but was a must-have feature for an e-commerce website.</h6>
+<h6>I added a "Product related to items in your cart" section on the cart page.  It will return products with the same category but not in the cart. I also created the "THE GNOME DEPOT" logo from scratch on Canva.</h6>
+<h6>Every time an order is placed, it subtracts from the quantity_in_stock.  If the stock drops below 10, a Thymeleaf if statement will show an “Only __ left in stock - order soon” message.</h6>
 
 ## Authors
 
