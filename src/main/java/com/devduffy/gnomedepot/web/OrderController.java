@@ -67,9 +67,10 @@ public class OrderController {
         
         if(!(orderDetails.isEmpty())) {
             List<Product> similarProducts = new ArrayList<Product>();
+            similarProducts.clear();
             for (int i = 0; i < orderDetails.size(); i++) {
                 Product similarProduct = productService.getSimilarProducts(orderDetails.get(i).getProduct().getCategory().substring(0, 3), orderDetails.get(i).getProduct().getId());
-                if(similarProduct != null) {
+                if(similarProduct != null && (!(similarProducts.contains(similarProduct))) && (!(productsInCart.contains(similarProduct)))) {
                     similarProducts.add(similarProduct);
                 }  
             }

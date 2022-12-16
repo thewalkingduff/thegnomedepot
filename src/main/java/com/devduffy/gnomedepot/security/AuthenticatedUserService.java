@@ -55,7 +55,7 @@ public class AuthenticatedUserService {
 
 	public User getCurrentUser() {
 		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-		HttpSession session = attr.getRequest().getSession(true); // true == allow create
+		HttpSession session = attr.getRequest().getSession(true);
 		User user = (User) session.getAttribute("user");
 		if (user == null) {
 			user =  userRepository.findByEmail(getCurrentUsername());

@@ -58,7 +58,6 @@
                 <div sec:authorize="isAuthenticated()">
                     <p class="login-status">
                         <span sec:authentication="name"></span> <br>
-                        <span sec:authentication="principal.authorities"></span> |
                         <a th:href="@{/user/logout}"
                             style="color: #F96302; text-decoration: none; font-weight: 900; letter-spacing: 1px;">Logout</a>
                     </p>

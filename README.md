@@ -19,7 +19,7 @@ The Gnome Depot is a Spring Boot MVC e-commerce app that utilizes MySQL on the b
     <li>register an account</li>
     <li>log in</li>
     <li>view products</li>
-    <li>search for a products</li>
+    <li>search for products</li>
     <li>add products to cart</li>
     <li>view similar products to the ones that are already in their cart</li>
     <li>checkout and receive order confirmation</li>
