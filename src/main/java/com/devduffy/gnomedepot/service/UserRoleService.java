@@ -8,11 +8,8 @@ import com.devduffy.gnomedepot.entity.UserRole;
 import com.devduffy.gnomedepot.repository.UserRoleRepository;
 
 public interface UserRoleService {
-    
    List<UserRole> getAllRoles();
-
    UserRole getUserRoleById(Integer userId);
-
    UserRole getUserRoleByName(String name);
 
 }

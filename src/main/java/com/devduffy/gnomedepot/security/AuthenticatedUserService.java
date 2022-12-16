@@ -25,8 +25,6 @@ public class AuthenticatedUserService {
 	@Autowired
 	UserRepository userRepository;
 
-	// added @Lazy to this to prevent a circular loading reference in component scan
-	// https://stackoverflow.com/questions/65807838/spring-authenticationmanager-and-circular-dependency
 	@Lazy
 	@Autowired
 	private AuthenticationManager authenticationManager;

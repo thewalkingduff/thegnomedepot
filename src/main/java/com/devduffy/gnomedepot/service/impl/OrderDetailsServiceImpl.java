@@ -1,7 +1,6 @@
 package com.devduffy.gnomedepot.service.impl;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,8 +48,6 @@ public class OrderDetailsServiceImpl implements OrderDetailsService{
         orderDetailsRepository.save(orderDetails);
     }
 
-  
-
     @Override
     public void save(OrderDetails orderDetails) {
          orderDetailsRepository.save(orderDetails);   
@@ -61,30 +58,20 @@ public class OrderDetailsServiceImpl implements OrderDetailsService{
         return orderDetailsRepository.findByOrder(order);
     }
 
-
-
     @Override
     public OrderDetails getByOrderAndProduct(Integer orderId, Integer productId) {
-
         return orderDetailsRepository.findByOrderAndProduct(orderId, productId);
     }
-
-
 
     @Override
     public void deleteItemFromOrder(Integer orderDetailsId) {
         orderDetailsRepository.deleteById(orderDetailsId);
     }
 
-
-
     @Override
     public OrderDetails getByOrderDetailsId(Integer id) {
-        // TODO Auto-generated method stub
         return orderDetailsRepository.findByOrderDetailsId(id);
     }
-
-
 
     @Override
     public OrderDetails createOrderDetails(ProductQuantityDTO productQuantityDTO) {
@@ -99,27 +86,4 @@ public class OrderDetailsServiceImpl implements OrderDetailsService{
         orderDetails.setTotal(product.getPrice() * productQuantityDTO.getQuantity());
         return orderDetails;
     }
-
-
-
-
-
-    
-
-
-
-   
-
-
-
-   
-
-    
-
-
-
-    
-
-
-  
 }

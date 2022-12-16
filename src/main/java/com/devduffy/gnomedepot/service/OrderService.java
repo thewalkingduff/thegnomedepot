@@ -1,7 +1,6 @@
 package com.devduffy.gnomedepot.service;
 
 import java.util.List;
-import java.util.Map;
 
 import com.devduffy.gnomedepot.entity.Order;
 import com.devduffy.gnomedepot.entity.Product;
@@ -14,11 +13,10 @@ public interface OrderService {
     List<Order> getListOrderOfUser(User user);
     List<Order> getAllOrders();
     void addToCart(Product product, Order order, User user);
-    // List<Product> getProductsInOrder(User user, Order orderId);
     Order getOrderByUser(User user);
     void saveOrder(Order order);
     Order getCurrentOrderOrNewOrder(User user);
-    void setFieldsIfNewOrder(Order order, User user);
-   
-   
+    void setFieldsIfNewOrder(Order order, User user); 
+    Order finalizeOrder(Integer orderId);
+    Double getOrderTotalWithTaxAndShipping(Order order);
 }

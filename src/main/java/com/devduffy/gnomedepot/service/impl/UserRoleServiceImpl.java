@@ -9,7 +9,6 @@ import com.devduffy.gnomedepot.repository.UserRoleRepository;
 import com.devduffy.gnomedepot.service.UserRoleService;
 
 public class UserRoleServiceImpl implements UserRoleService {
-
     @Autowired
     private UserRoleRepository userRoleRepository;
 

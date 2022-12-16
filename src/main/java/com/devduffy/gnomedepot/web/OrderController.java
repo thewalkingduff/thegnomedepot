@@ -1,8 +1,6 @@
 package com.devduffy.gnomedepot.web;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.devduffy.gnomedepot.Constants;
 import com.devduffy.gnomedepot.dto.CartItem;
 import com.devduffy.gnomedepot.dto.ProductQuantityDTO;
 import com.devduffy.gnomedepot.entity.Order;
@@ -110,6 +107,7 @@ public class OrderController {
             orderDetails.setQuantity(orderDetails.getQuantity() + productQuantityDTO.getQuantity());
             orderDetails.setTotal(product.getPrice() * orderDetails.getQuantity());
         }
+
         orderDetailsService.save(orderDetails);
 
         return "redirect:/order/current";
@@ -119,7 +117,6 @@ public class OrderController {
     @GetMapping("/order/delete")
     public String removeItemFromorder(Model model, @RequestParam("id") Integer id) {
         orderDetailsService.deleteItemFromOrder(id);
-        ;
         return "redirect:/order/current";
     }
 
@@ -183,14 +180,7 @@ public class OrderController {
     @GetMapping("/order/submit")
     public String updateorder(Model model, @RequestParam("id") Integer id) {
         if (totalProductsInCart > 0) {
-            Order order = orderService.getOrderById(id);
-            order.setOrderDate(new Date());
-            order.setStatus("complete");
-            DecimalFormat df = new DecimalFormat("#.##");
-            Double roundTotal = Double.valueOf(df.format(order.getTotalAmount() + Constants.FLAT_SHIPPING_COST + (order.getTotalAmount() * Constants.TAX_RATE))) ;
-            order.setTotalAmount(roundTotal);
-            orderService.saveOrder(order);
-        
+            Order order = orderService.finalizeOrder(id);
             List<OrderDetails> orderDetailsItem = orderDetailsService.getByOrder(order);
             System.out.println(orderDetailsItem);
             productService.updateProductQuantityInStock(orderDetailsItem);

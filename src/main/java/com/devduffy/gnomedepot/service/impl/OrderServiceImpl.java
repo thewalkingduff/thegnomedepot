@@ -1,14 +1,8 @@
 package com.devduffy.gnomedepot.service.impl;
 
-import java.util.ArrayList;
+import java.text.DecimalFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +10,6 @@ import com.devduffy.gnomedepot.Constants;
 import com.devduffy.gnomedepot.entity.Order;
 import com.devduffy.gnomedepot.entity.Product;
 import com.devduffy.gnomedepot.entity.User;
-import com.devduffy.gnomedepot.exception.OrderNotFoundException;
 import com.devduffy.gnomedepot.repository.OrderRepository;
 import com.devduffy.gnomedepot.repository.ProductRepository;
 import com.devduffy.gnomedepot.repository.UserRepository;
@@ -60,11 +53,7 @@ public class OrderServiceImpl implements OrderService {
         order.setUser(user);
         order.setStatus("processing");
         order.setOrderDate(new Date());
-        
-		// orderRepository.save(order);	
 	}
-
-	
 
     @Override
     public Order getOrderByUser(User user) {
@@ -89,11 +78,6 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order getCurrentOrderOrNewOrder(User user) {
         List<Order> allUserOrders = getListOrderOfUser(user);
-
-        // List<Order> pendingOrder = allUserOrders.stream()
-        // .filter(order -> order.getStatus().equals("pending"))
-        // .limit(1)
-        // .collect(Collectors.toList());
           
         for (Order o : allUserOrders) {
             String orderStatus = o.getStatus();
@@ -101,7 +85,6 @@ public class OrderServiceImpl implements OrderService {
                 return o;
             }  
         } 
-        // return pendingOrder == null ? new Order() : pendingOrder.get(0);
          return new Order();
      }
 
@@ -116,16 +99,20 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
-    
+    @Override
+    public Order finalizeOrder(Integer orderId) {
+        Order order = getOrderById(orderId);
+        order.setOrderDate(new Date());
+        order.setStatus("complete");
+        Double orderTotal = getOrderTotalWithTaxAndShipping(order);
+        order.setTotalAmount(orderTotal);
+        saveOrder(order);
+        return order;
+    }
 
-    
-
-    
-
-    
-    // @Override
-    // public List<Product> getProductsInOrder(User user, Order orderId) {
-    //     // TODO Auto-generated method stub
-    //     return orderRepository.findByProducts(user, orderId);
-    // }
+    @Override
+    public Double getOrderTotalWithTaxAndShipping(Order order) {
+        DecimalFormat df = new DecimalFormat("#.##");
+        return Double.valueOf(df.format(order.getTotalAmount() + Constants.FLAT_SHIPPING_COST + (order.getTotalAmount() * Constants.TAX_RATE)));
+    }
 }

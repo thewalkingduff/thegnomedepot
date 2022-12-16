@@ -7,8 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.devduffy.gnomedepot.dto.UserRoleDTO;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,17 +32,4 @@ public class UserRole {
 
     @Column(name="role_name", nullable = false)
     private String roleName;
-
-	public UserRoleDTO toDTO () {
-		return new UserRoleDTO(id, userId, roleName);
-	}
-
-	
-
-	
-
-	
-
-
-
 }

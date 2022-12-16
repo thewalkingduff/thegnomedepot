@@ -62,10 +62,4 @@ public class ProductServiceImpl implements ProductService{
         return productRepository.findSimilarProducts(category, prodId);
     }
 
-   
-
-    // @Override
-    // public List<Product> getByName(String name) {
-    //     return productRepository.findByName(name);
-    // }
 }

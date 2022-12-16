@@ -17,7 +17,6 @@ import com.devduffy.gnomedepot.entity.UserRole;
 import com.devduffy.gnomedepot.repository.UserRepository;
 import com.devduffy.gnomedepot.repository.UserRoleRepository;
 
-
 @Component
 public class UserDetailsServiceImpl implements UserDetailsService {
 
@@ -41,7 +40,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 		List<UserRole> userRoles = userRoleRepository.findByUserId(user.getId());
 
-		// check the account status
 		boolean accountIsEnabled = true;
 		boolean accountNonExpired = true;
 		boolean credentialsNonExpired = true;
@@ -58,7 +56,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		for (UserRole role : userRoles) {
 			authorities.add(new SimpleGrantedAuthority(role.getRoleName()));
 		}
-
 		return authorities;
 	}
 
